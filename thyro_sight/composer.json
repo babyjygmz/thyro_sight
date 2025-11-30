@@ -1,0 +1,23 @@
+{
+    "name": "thyrosight/authentication-system",
+    "description": "ThyroSight Authentication System with PHP backend",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "phpmailer/phpmailer": "^6.8"
+    },
+    "require-dev": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "ThyroSight\\": "src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

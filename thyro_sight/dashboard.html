@@ -1,0 +1,1301 @@
+r<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ThyroSight</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        /* Dashboard specific styles */
+        .dashboard-container {
+            min-height: calc(100vh - 80px - 200px);
+            padding: 0 1rem 1rem 1rem;
+            margin-top: -1.5rem;
+            background: linear-gradient(135deg,
+                rgba(37, 99, 235, 0.1) 0%,
+                rgba(16, 185, 129, 0.08) 50%,
+                rgba(37, 99, 235, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(59,130,246,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .dashboard-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem 0.25rem 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 0.4rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dashboard-subtitle {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            opacity: 0.8;
+        }
+
+        /* Logo hover effects */
+        .logo-section a {
+            transition: all 0.3s ease;
+        }
+
+        .logo-section a:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.1);
+        }
+
+        .logo-section a:hover .logo-text {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Logout Modal Styles */
+        .logout-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .logout-modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .logout-modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--light-green));
+        }
+
+        .logout-modal-header {
+            padding: 2rem 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .logout-icon {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, var(--primary-blue), var(--light-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .logout-modal-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 0.8rem;
+        }
+
+        .logout-modal-header p {
+            color: var(--dark-gray);
+            opacity: 0.8;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .logout-modal-actions {
+            padding: 0 2rem 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .logout-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            min-width: 100px;
+        }
+
+        .logout-btn.cancel {
+            background: white;
+            color: var(--dark-gray);
+            border: 1px solid #d1d5db;
+        }
+
+        .logout-btn.cancel:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .logout-btn.confirm {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .logout-btn.confirm:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .hero-underline {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+            gap: 0;
+        }
+
+        .underline-segment {
+            height: 4px;
+            width: 80px;
+            border-radius: 2px;
+        }
+
+        .underline-segment.blue {
+            background: var(--primary-blue);
+        }
+
+        .underline-segment.green {
+            background: var(--light-green);
+        }
+
+        .dashboard-grid {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .dashboard-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            height: 100%;
+            width: 400px;
+            flex-shrink: 0;
+        }
+
+        .dashboard-right {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            height: 100%;
+            flex: 1;
+        }
+
+        .profile-card {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(248, 250, 252, 0.95) 100%);
+            border-radius: 24px;
+            padding: 1.8rem;
+            box-shadow: 
+                0 25px 70px rgba(0, 0, 0, 0.12),
+                0 10px 30px rgba(37, 99, 235, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(25px);
+            width: 400px;
+            flex-shrink: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 
+                0 35px 90px rgba(0, 0, 0, 0.15),
+                0 15px 40px rgba(37, 99, 235, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.3);
+        }
+
+        .profile-info h3 {
+            font-size: 1.3rem;
+            color: var(--dark-gray);
+            margin-bottom: 0.3rem;
+        }
+
+        .profile-info p {
+            color: var(--dark-gray);
+            opacity: 0.8;
+            margin: 0.15rem 0;
+            font-size: 0.9rem;
+        }
+
+        .prediction-card {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(248, 250, 252, 0.95) 100%);
+            border-radius: 24px;
+            padding: 1.8rem;
+            box-shadow: 
+                0 25px 70px rgba(0, 0, 0, 0.12),
+                0 10px 30px rgba(37, 99, 235, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(25px);
+            max-width: 450px;
+            flex: 1;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .prediction-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 
+                0 35px 90px rgba(0, 0, 0, 0.15),
+                0 15px 40px rgba(37, 99, 235, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .prediction-header {
+            text-align: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .prediction-header h3 {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            margin-bottom: 0.2rem;
+        }
+
+        .prediction-result {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .prediction-left {
+            flex: 1;
+            text-align: center;
+            min-width: 0;
+        }
+
+        .prediction-right {
+            flex: 1;
+            text-align: center;
+            min-width: 0;
+        }
+
+        .prediction-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .prediction-badge.normal {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .prediction-badge.hypo {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        .prediction-badge.hyper {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .prediction-badge.pending {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            color: white;
+        }
+
+        .confidence-score {
+            text-align: center;
+        }
+
+        .confidence-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-blue) 0deg, #e5e7eb 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.3rem;
+            position: relative;
+        }
+
+        .confidence-circle::before {
+            content: '';
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .confidence-text {
+            position: relative;
+            z-index: 1;
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            line-height: 1;
+        }
+
+        .chart-card {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(248, 250, 252, 0.95) 100%);
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 
+                0 25px 70px rgba(0, 0, 0, 0.12),
+                0 10px 30px rgba(37, 99, 235, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(25px);
+            height: 100%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chart-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 
+                0 35px 90px rgba(0, 0, 0, 0.15),
+                0 15px 40px rgba(37, 99, 235, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .chart-header {
+            text-align: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .chart-header h3 {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin-bottom: 0.2rem;
+        }
+
+        .chart-container {
+            height: 240px;
+            width: 100%;
+        }
+
+        .quote-container {
+            padding: 0.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quote-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--dark-gray);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            max-width: 100%;
+            font-weight: 500;
+        }
+
+        .quote-author {
+            font-size: 0.9rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-category {
+            font-size: 0.75rem;
+            color: var(--dark-gray);
+            opacity: 0.8;
+            background: rgba(37, 99, 235, 0.15);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            font-weight: 600;
+        }
+
+        .education-card {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(248, 250, 252, 0.95) 100%);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 
+                0 25px 70px rgba(0, 0, 0, 0.12),
+                0 10px 30px rgba(37, 99, 235, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(25px);
+            margin-top: 5rem;
+            width: 100%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .education-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 
+                0 35px 90px rgba(0, 0, 0, 0.15),
+                0 15px 40px rgba(37, 99, 235, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .education-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .education-header h3 {
+            font-size: 1.3rem;
+            color: var(--dark-gray);
+            margin-bottom: 0.3rem;
+        }
+
+        .education-topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0.6rem;
+        }
+
+        .education-topic {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-green));
+            color: white;
+            padding: 1rem;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.2);
+        }
+
+        .education-topic:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .education-topic i {
+            font-size: 1.6rem;
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .education-topic h4 {
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .education-content {
+            display: none;
+            margin-top: 0.8rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .education-content.active {
+            display: block;
+        }
+
+        .education-content h5 {
+            color: white;
+            margin-bottom: 0.6rem;
+            font-size: 1rem;
+        }
+
+        .education-content p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--dark-gray);
+        }
+
+        .loading i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* New Dashboard Cards */
+        .health-stats-combined-card,
+        .quote-card {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(248, 250, 252, 0.95) 100%);
+            border-radius: 24px;
+            padding: 1.8rem;
+            box-shadow: 
+                0 25px 70px rgba(0, 0, 0, 0.12),
+                0 10px 30px rgba(37, 99, 235, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(25px);
+            flex: 1;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .health-stats-combined-card {
+            max-width: 950px;
+            min-height: 455px;
+        }
+
+        .quote-card {
+            width: 400px;
+            flex-shrink: 0;
+        }
+
+        .health-stats-combined-card:hover,
+        .quote-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 
+                0 35px 90px rgba(0, 0, 0, 0.15),
+                0 15px 40px rgba(37, 99, 235, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .card-header h3 {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin: 0;
+        }
+
+        .card-header i {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        /* Health Overview Combined Card */
+        .health-overview-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .overview-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            background: rgba(37, 99, 235, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            min-height: 80px;
+        }
+
+        .overview-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--dark-gray);
+        }
+
+        .overview-header i {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .overview-header span {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .overview-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .overview-section .prediction-result {
+            margin: 0;
+        }
+
+        .overview-section .confidence-score {
+            margin: 0;
+        }
+
+        .overview-section .confidence-circle {
+            width: 50px;
+            height: 50px;
+        }
+
+        .overview-section .confidence-text {
+            font-size: 0.75rem;
+            line-height: 1;
+        }
+
+        /* Combined Result & Confidence Layout */
+        .combined-result-confidence {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .combined-result-confidence .prediction-result {
+            margin: 0;
+        }
+
+        .combined-result-confidence .confidence-score {
+            margin: 0;
+        }
+
+        /* Average Confidence Score Styling */
+        .average-confidence-display {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .average-score {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--light-green);
+        }
+
+        .trend-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.6rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .trend-indicator i {
+            color: var(--light-green);
+            font-size: 0.8rem;
+        }
+
+        .trend-indicator span {
+            color: var(--light-green);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Removed unused card styles - keeping only what's needed */
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 1rem;
+            }
+
+            .dashboard-content {
+                padding: 0.25rem 1rem;
+            }
+
+            .dashboard-title {
+                font-size: 2rem;
+            }
+
+            /* Mobile responsive styles for remaining cards */
+
+            .education-topics {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Creative Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <a href="homepage.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.8rem;">
+                    <div class="logo-icon">
+                        <img src="thy.png" alt="ThyroSight Logo" class="logo-image">
+                    </div>
+                    <h1 class="logo-text">ThyroSight</h1>
+                </a>
+            </div>
+            <nav class="nav-links" id="nav-links">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="health-assessment.html" class="nav-link">Health Assessment</a>
+                <a href="history.html" class="nav-link">History</a>
+            </nav>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="auth-buttons">
+                <a href="auth/logout.php" class="btn btn-outline">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="dashboard-container">
+            <div class="dashboard-content">
+                <div class="dashboard-header">
+                    <h1 class="dashboard-title">Dashboard</h1>
+                    <div class="hero-underline">
+                        <div class="underline-segment blue"></div>
+                        <div class="underline-segment green"></div>
+                    </div>
+                    <p class="dashboard-subtitle">Welcome back! Here's your thyroid health overview</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-left">
+                        <!-- User Profile Card -->
+                        <div class="profile-card">
+                            <div class="profile-header">
+                                <div class="profile-avatar" id="profile-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="profile-info">
+                                    <h3 id="user-name">Loading...</h3>
+                                    <p id="user-dob">Loading...</p>
+                                    <p id="user-age">Loading...</p>
+                                    <p id="user-gender">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Daily Motivational Quote Card -->
+                        <div class="quote-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-quote-left"></i> Daily Motivation</h3>
+                            </div>
+                            <div class="quote-container" id="quote-container">
+                                <div class="quote-text" id="quote-text">
+                                    "Your health is an investment, not an expense."
+                                </div>
+                                <div class="quote-author" id="quote-author">
+                                    - Unknown
+                                </div>
+                                <div class="quote-category" id="quote-category">
+                                    Health & Wellness
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-right">
+                        <!-- Health Stats Card (Combined) -->
+                        <div class="health-stats-combined-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-chart-line"></i> Health Overview</h3>
+                            </div>
+                            <div class="health-overview-content">
+                                <!-- Total Assessments -->
+                                <div class="overview-section">
+                                    <div class="overview-header">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <span>Total Assessments</span>
+                                    </div>
+                                    <div class="overview-value" id="total-assessments">0</div>
+                                </div>
+                                
+                                <!-- Latest Result & Confidence Score Combined -->
+                                <div class="overview-section">
+                                    <div class="overview-header">
+                                        <i class="fas fa-heartbeat"></i>
+                                        <span>Latest Result & Confidence</span>
+                                    </div>
+                                    <div class="combined-result-confidence">
+                                        <div class="prediction-result">
+                                            <div class="prediction-badge pending" id="prediction-badge">
+                                                Loading...
+                                            </div>
+                                        </div>
+                                        <div class="confidence-score">
+                                            <div class="confidence-circle" id="confidence-circle">
+                                                <div class="confidence-text" id="confidence-text">-</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Average Confidence Score -->
+                                <div class="overview-section">
+                                    <div class="overview-header">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>Average Confidence</span>
+                                    </div>
+                                    <div class="average-confidence-display">
+                                        <div class="average-score" id="average-confidence">78%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 ThyroSight. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Logout Confirmation Modal -->
+    <div class="logout-modal-overlay" id="logoutModal" style="display: none;">
+        <div class="logout-modal">
+            <div class="logout-modal-header">
+                <div class="logout-icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                <h2>Confirm Logout</h2>
+                <p>Are you sure you want to logout from your ThyroSight account? You'll need to login again to access your dashboard.</p>
+            </div>
+            <div class="logout-modal-actions">
+                <button class="logout-btn cancel" onclick="hideLogoutModal()">Cancel</button>
+                <button class="logout-btn confirm" onclick="confirmLogout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check login status and load dashboard data
+        document.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+        });
+
+        // Check if user is logged in
+        function checkLoginStatus() {
+            fetch('check_login_status.php', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.logged_in) {
+                        loadDashboardData();
+                    } else {
+                        window.location.href = 'auth/login.php';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking login status:', error);
+                    const dashboardContent = document.querySelector('.dashboard-content');
+                    const errorMessage = document.createElement('div');
+                    errorMessage.style.textAlign = 'center';
+                    errorMessage.style.padding = '3rem';
+                    errorMessage.style.color = '#ef4444';
+                    errorMessage.innerHTML = `
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <h2>Error Checking Login Status</h2>
+                        <p>Error: ${error.message}</p>
+                        <p>Please try refreshing the page or <a href="auth/login.php" style="color: var(--primary-blue);">login again</a></p>
+                        <button onclick="checkLoginStatus()" class="action-btn secondary" style="margin-top: 1rem;">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    `;
+                    dashboardContent.innerHTML = '';
+                    dashboardContent.appendChild(errorMessage);
+                });
+        }
+
+        // Load dashboard data
+        function loadDashboardData() {
+            loadUserProfile();
+            loadPredictionResult();
+            loadDailyQuote();
+        }
+
+        // Load user profile
+        function loadUserProfile() {
+            fetch('get_user_profile.php', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const user = data.user;
+                        // Capitalize first and last names
+                        const firstName = user.first_name.charAt(0).toUpperCase() + user.first_name.slice(1);
+                        const lastName = user.last_name.charAt(0).toUpperCase() + user.last_name.slice(1);
+                        document.getElementById('user-name').textContent = `${firstName} ${lastName}`;
+
+                        if (user.date_of_birth) {
+                            const dob = new Date(user.date_of_birth);
+                            document.getElementById('user-dob').textContent = `Date of Birth: ${dob.toLocaleDateString()}`;
+
+                            // Calculate age
+                            const today = new Date();
+                            let age = today.getFullYear() - dob.getFullYear();
+                            const monthDiff = today.getMonth() - dob.getMonth();
+
+                            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                                age--;
+                            }
+
+                            document.getElementById('user-age').textContent = `Age: ${age} years old`;
+                            } else {
+                            document.getElementById('user-dob').textContent = 'Date of birth not provided';
+                            document.getElementById('user-age').textContent = 'Age: Not available';
+                            }
+
+                        // Display gender
+                        if (user.gender) {
+                            const genderText = user.gender.charAt(0).toUpperCase() + user.gender.slice(1);
+                            document.getElementById('user-gender').textContent = `Gender: ${genderText}`;
+                        } else {
+                            document.getElementById('user-gender').textContent = 'Gender: Not specified';
+                        }
+
+                        // Set avatar initials (capitalized)
+                        const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`;
+                        document.getElementById('profile-avatar').innerHTML = initials;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading user profile:', error);
+                    document.getElementById('user-name').textContent = 'Error loading profile';
+                    document.getElementById('user-dob').textContent = 'Error loading profile';
+                    document.getElementById('user-age').textContent = 'Error loading profile';
+                    document.getElementById('user-gender').textContent = 'Error loading profile';
+                });
+        }
+
+        // Load prediction result
+        function loadPredictionResult() {
+            fetch('get_assessment_history.php', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.assessments) {
+                        // Update total assessments count
+                        document.getElementById('total-assessments').textContent = data.assessments.length;
+
+                        // Calculate and update average confidence
+                        if (data.assessments.length > 0) {
+                            const totalConfidence = data.assessments.reduce((sum, assessment) => sum + (assessment.confidence_score || 0), 0);
+                            const average = Math.round(totalConfidence / data.assessments.length);
+                            document.getElementById('average-confidence').textContent = `${average}%`;
+
+                            // Update latest result
+                            const latest = data.assessments[0];
+                            updatePredictionDisplay(latest.prediction, latest.confidence_score);
+                        } else {
+                            document.getElementById('average-confidence').textContent = '0%';
+                            updatePredictionDisplay('pending', 0);
+                        }
+                    } else {
+                        document.getElementById('total-assessments').textContent = '0';
+                        document.getElementById('average-confidence').textContent = '0%';
+                        updatePredictionDisplay('pending', 0);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading prediction result:', error);
+                    document.getElementById('total-assessments').textContent = '0';
+                    document.getElementById('average-confidence').textContent = '0%';
+                    updatePredictionDisplay('pending', 0);
+                });
+        }
+
+        // Update prediction display
+        function updatePredictionDisplay(prediction, confidenceScore) {
+            const badge = document.getElementById('prediction-badge');
+            const confidenceText = document.getElementById('confidence-text');
+            const confidenceCircle = document.getElementById('confidence-circle');
+            
+            // Update badge
+            badge.className = `prediction-badge ${prediction}`;
+            if (prediction === 'normal') {
+                badge.textContent = 'NORMAL THYROID FUNCTION';
+            } else if (prediction === 'hypo') {
+                badge.textContent = 'HYPOTHYROIDISM';
+            } else if (prediction === 'hyper') {
+                badge.textContent = 'HYPERTHYROIDISM';
+            } else {
+                badge.textContent = 'PENDING ASSESSMENT';
+            }
+            
+            // Update confidence score
+            if (confidenceScore > 0) {
+                confidenceText.textContent = `${confidenceScore}%`;
+                const percentage = confidenceScore / 100;
+                confidenceCircle.style.background = `conic-gradient(var(--primary-blue) ${percentage * 360}deg, #e5e7eb ${percentage * 360}deg)`;
+            } else {
+                confidenceText.textContent = '-';
+                confidenceCircle.style.background = 'conic-gradient(#e5e7eb 0deg, #e5e7eb 360deg)';
+            }
+        }
+
+        // Load daily quote
+        function loadDailyQuote() {
+            const quotes = [
+                {
+                    text: "Your health is an investment, not an expense.",
+                    author: "Unknown",
+                    category: "Health & Wellness"
+                },
+                {
+                    text: "The greatest wealth is health.",
+                    author: "Ralph Waldo Emerson",
+                    category: "Philosophy"
+                },
+                {
+                    text: "Take care of your body. It's the only place you have to live.",
+                    author: "Jim Rohn",
+                    category: "Self-Care"
+                },
+                {
+                    text: "Health is not about the weight you lose, but the life you gain.",
+                    author: "Unknown",
+                    category: "Motivation"
+                },
+                {
+                    text: "Every day is a new beginning. Take a deep breath and start again.",
+                    author: "Unknown",
+                    category: "Mindfulness"
+                },
+                {
+                    text: "Your body hears everything your mind says.",
+                    author: "Naomi Judd",
+                    category: "Mind-Body Connection"
+                },
+                {
+                    text: "The only bad workout is the one that didn't happen.",
+                    author: "Unknown",
+                    category: "Fitness"
+                },
+                {
+                    text: "Wellness is the complete integration of body, mind, and spirit.",
+                    author: "Greg Anderson",
+                    category: "Holistic Health"
+                }
+            ];
+
+            // Get today's date to determine which quote to show
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const quoteIndex = dayOfYear % quotes.length;
+            const dailyQuote = quotes[quoteIndex];
+
+            // Update the quote display
+            document.getElementById('quote-text').textContent = dailyQuote.text;
+            document.getElementById('quote-author').textContent = `- ${dailyQuote.author}`;
+            document.getElementById('quote-category').textContent = dailyQuote.category;
+        }
+
+        // Toggle education content
+        function toggleEducation(topic) {
+            // Hide all content first
+            const allContent = document.querySelectorAll('.education-content');
+            allContent.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected content
+            const selectedContent = document.getElementById(`${topic}-content`);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+        }
+
+        // Add logout functionality
+        document.querySelector('a[href="auth/logout.php"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            showLogoutModal();
+        });
+
+        // Show logout modal
+        function showLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'flex';
+        }
+
+        // Hide logout modal
+        function hideLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'none';
+        }
+
+        // Confirm logout
+        function confirmLogout() {
+            window.location.href = 'auth/logout.php';
+        }
+        
+        // Mobile Navigation Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+            
+            if (mobileMenuToggle && navLinks) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('show');
+                });
+                
+                // Close mobile menu when clicking on a link
+                const navLinkElements = navLinks.querySelectorAll('.nav-link');
+                navLinkElements.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navLinks.classList.remove('show');
+                    });
+                });
+                
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navLinks.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                        navLinks.classList.remove('show');
+                    }
+                });
+            }
+        });
+
+        // New Dashboard Functions
+        function showHealthTips() {
+            const tips = [
+                "Maintain a balanced diet rich in iodine, selenium, and zinc for thyroid health.",
+                "Regular exercise helps regulate thyroid function and metabolism.",
+                "Get adequate sleep - poor sleep can affect thyroid hormone production.",
+                "Manage stress through meditation or yoga to support thyroid function.",
+                "Regular check-ups help monitor thyroid health and catch issues early."
+            ];
+            
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            alert(`💡 Health Tip:\n\n${randomTip}`);
+        }
+
+        function showHealthReminder() {
+            const reminder = prompt("Set a health reminder (e.g., 'Take thyroid medication', 'Schedule checkup'):");
+            if (reminder && reminder.trim()) {
+                alert(`✅ Reminder set: "${reminder.trim()}"\n\nWe'll remind you about this important health task!`);
+            }
+        }
+
+        // Load health statistics
+        function loadHealthStats() {
+            // Simulate loading health statistics
+            document.getElementById('total-assessments').textContent = '3';
+            document.getElementById('last-assessment').textContent = '2 days ago';
+            document.getElementById('health-score').textContent = '85%';
+            document.getElementById('average-confidence').textContent = '78%';
+        }
+
+        // Load recent activity
+        function loadRecentActivity() {
+            // This would typically load from a database
+            // For now, we'll keep the static content
+        }
+
+        // Initialize new dashboard features
+        document.addEventListener('DOMContentLoaded', function() {
+            loadHealthStats();
+            loadRecentActivity();
+        });
+    </script>
+</body>
+</html>

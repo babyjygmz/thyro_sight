@@ -1,0 +1,73 @@
+========================================
+HEALTH TABLE MIGRATION - INSTRUCTIONS
+========================================
+
+STEP 1: Make sure XAMPP is running
+- Open XAMPP Control Panel
+- Start Apache (if not already running)
+- Start MySQL (if not already running)
+
+STEP 2: Run the migration script
+Open your web browser and copy-paste this EXACT URL:
+
+http://localhost/thyro_sight/thyro_sight/update_health_table.php
+
+IMPORTANT: 
+- Note the double "thyro_sight/thyro_sight/" in the path
+- Use UNDERSCORE (not space)
+- Include "http://" at the beginning
+- Copy-paste the URL to avoid typos
+
+STEP 3: What you should see
+- A nicely formatted page showing the migration progress
+- Green checkmarks (✅) for successful column additions
+- A summary showing how many columns were added
+- Total column count after migration
+
+STEP 4: Verify the migration worked
+After running the migration, you can verify by:
+
+Option A: Check in phpMyAdmin
+1. Go to: http://localhost/phpmyadmin
+2. Select database: thydb
+3. Click on table: healthA
+4. Click "Structure" tab
+5. You should see 20 new columns added
+
+Option B: Run SQL query
+Execute this query in phpMyAdmin:
+```sql
+DESCRIBE healthA;
+```
+You should see approximately 50+ columns total.
+
+STEP 5: Test form submission
+1. Go to: http://localhost/thyro_sight/health-assessment.html
+2. Fill out the complete form
+3. Submit it
+4. Check the database to see if all fields are saved
+
+========================================
+TROUBLESHOOTING
+========================================
+
+If you get "Not Found" error:
+- Make sure you're using: http://localhost/thyro_sight/update_health_table.php
+- Check that Apache is running in XAMPP
+- Verify the file exists in: C:\xampp\htdocs\thyro_sight\
+- DO NOT use spaces - use underscore: thyro_sight
+
+If you get database connection error:
+- Make sure MySQL is running in XAMPP
+- Check config/database.php for correct credentials
+
+If migration fails:
+- Check logs/error_*.log for details
+- Make sure you have ALTER TABLE permissions
+- Verify healthA table exists before running
+
+========================================
+NEED MORE HELP?
+========================================
+
+See HEALTH_TABLE_FIX_SUMMARY.md for complete documentation

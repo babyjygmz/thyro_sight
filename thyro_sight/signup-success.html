@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Success - ThyroSight</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Compact styling for signup success page - Same as other auth forms */
+        .auth-card {
+            max-width: 600px !important;
+            width: 100% !important;
+            padding: 1rem !important;
+        }
+        
+        /* Reduce spacing between elements */
+        .auth-header {
+            margin-bottom: 0.75rem !important;
+        }
+        
+        .auth-header h2 {
+            font-size: 1.3rem !important;
+            margin-bottom: 0.25rem !important;
+        }
+        
+        .auth-header p {
+            font-size: 0.8rem !important;
+        }
+        
+        /* Compact success animation */
+        .success-animation {
+            margin-bottom: 0.75rem !important;
+        }
+        
+        .checkmark-circle {
+            width: 60px !important;
+            height: 60px !important;
+        }
+        
+        /* Compact success features */
+        .success-features {
+            margin: 0.75rem 0 !important;
+            gap: 0.5rem !important;
+        }
+        
+        .feature-item {
+            padding: 0.5rem !important;
+            font-size: 0.8rem !important;
+        }
+        
+        .feature-item i {
+            font-size: 1rem !important;
+            margin-right: 0.5rem !important;
+        }
+        
+        /* Compact success actions */
+        .success-actions {
+            margin: 0.75rem 0 !important;
+            gap: 0.5rem !important;
+        }
+        
+        .btn-full {
+            padding: 0.6rem 1rem !important;
+            font-size: 0.9rem !important;
+        }
+        
+        .auth-footer {
+            margin-top: 0.75rem !important;
+        }
+        
+        .auth-footer p {
+            font-size: 0.8rem !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Creative Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <img src="thy.png" alt="ThyroSight Logo" class="logo-image">
+                </div>
+                <h1 class="logo-text">ThyroSight</h1>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#developers" class="nav-link">Developers</a>
+            </nav>
+            <div class="auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Log In</a>
+            </div>
+        </div>
+        <div class="header-decoration">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content auth-page">
+        <div class="auth-card success-card">
+            <div class="success-animation">
+                <div class="checkmark-circle">
+                    <div class="checkmark"></div>
+                </div>
+            </div>
+
+            <div class="auth-header">
+                <h2>Welcome to ThyroSight!</h2>
+                <p>Your account has been created successfully. You can now sign in and start your thyroid health journey.</p>
+            </div>
+
+            <div class="success-features">
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure & Private</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-brain"></i>
+                    <span>AI-Powered Insights</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Health Tracking</span>
+                </div>
+            </div>
+
+            <div class="success-actions">
+                <a href="login.html" class="btn btn-primary btn-full">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In Now
+                </a>
+                <a href="index.html" class="btn btn-outline btn-full">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </a>
+            </div>
+
+            <div class="auth-footer">
+                <p>Need help? <a href="#" class="link">Contact Support</a></p>
+            </div>
+        </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 ThyroSight. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+</body>
+</html>

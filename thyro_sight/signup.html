@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - ThyroSight</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Force 3-line layout for signup form - Compact size */
+        .auth-card {
+            max-width: 800px !important;
+            width: 100% !important;
+            padding: 0.75rem !important;
+        }
+        
+        .form-row.line-1 {
+            display: grid !important;
+            grid-template-columns: 1fr 0.3fr 1fr 1fr !important;
+            gap: 0.4rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .form-row.line-2 {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 0.4rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .form-row.line-3 {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 0.4rem !important;
+            margin-bottom: 0 !important;
+        }
+        
+        /* Override any existing form-row styles */
+        .auth-form .form-row {
+            display: grid !important;
+        }
+        
+        /* Reduce spacing between form elements */
+        .form-group {
+            margin-bottom: 0.2rem !important;
+        }
+        
+        .form-group label {
+            margin-bottom: 0.2rem !important;
+            font-size: 0.75rem !important;
+        }
+        
+        .auth-header {
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .auth-logo {
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 1.1rem !important;
+            margin-bottom: 0.4rem !important;
+            /* Remove logo animation */
+            animation: none !important;
+            transform: none !important;
+        }
+        
+        .auth-header h2 {
+            font-size: 1.2rem !important;
+            margin-bottom: 0.2rem !important;
+        }
+        
+        .auth-header p {
+            font-size: 0.75rem !important;
+        }
+        
+        .auth-footer {
+            margin-top: 0.5rem !important;
+        }
+        
+        /* Make inputs more compact */
+        .input-group input,
+        .input-group select {
+            padding: 0.5rem 0.6rem 0.5rem 2.2rem !important;
+            font-size: 0.85rem !important;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Creative Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <img src="thy.png" alt="ThyroSight Logo" class="logo-image">
+                </div>
+                <h1 class="logo-text">ThyroSight</h1>
+            </div>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#developers" class="nav-link">Developers</a>
+            </nav>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Log In</a>
+            </div>
+        </div>
+        <div class="header-decoration">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content auth-page">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h2>Create Your Account</h2>
+                <p>Join ThyroSight and take control of your thyroid health</p>
+            </div>
+
+            <form id="signupForm" class="auth-form" action="auth/signup.php" method="POST">
+                <!-- Line 1: First Name, Middle Initial, Last Name, Date of Birth -->
+                <div class="form-row line-1">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="middleInitial">MI</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="middleInitial" name="middleInitial" maxlength="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfBirth">Date of Birth</label>
+                        <div class="input-group">
+                            <i class="fas fa-calendar"></i>
+                            <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Line 2: Email and Gender -->
+                <div class="form-row line-2">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <div class="input-group">
+                            <i class="fas fa-venus-mars"></i>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Line 3: Password and Confirm Password -->
+                <div class="form-row line-3">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" required>
+                            <button type="button" class="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strengthFill"></div>
+                            </div>
+                            <span class="strength-text" id="strengthText">Password strength</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            <button type="button" class="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">
+                    <span class="btn-text">Create Account</span>
+                    <div class="btn-loader" style="display: none;">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html" class="link">Log In</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notification Popup -->
+    <div id="notification" class="notification">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-message"></span>
+            <button class="notification-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 ThyroSight. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script>
+        // Mobile Navigation Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+            
+            if (mobileMenuToggle && navLinks) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('show');
+                });
+                
+                // Close mobile menu when clicking on a link
+                const navLinkElements = navLinks.querySelectorAll('.nav-link');
+                navLinkElements.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navLinks.classList.remove('show');
+                    });
+                });
+                
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navLinks.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                        navLinks.classList.remove('show');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

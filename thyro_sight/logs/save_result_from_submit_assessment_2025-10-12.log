@@ -1,0 +1,250 @@
+{
+    "timestamp": "2025-10-12 23:59:58",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 0,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 0,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 0,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "hyper",
+        "c_score": 98,
+        "shap_values": [
+            {
+                "description": "Age contribution",
+                "highlight": true,
+                "impact": 0.0019607790145374417,
+                "name": "Age"
+            },
+            {
+                "description": "Sex contribution",
+                "highlight": false,
+                "impact": -0.00390223423926871,
+                "name": "Sex"
+            },
+            {
+                "description": "Weight contribution",
+                "highlight": false,
+                "impact": 0.0019414552247312856,
+                "name": "Weight"
+            },
+            {
+                "description": "Height contribution",
+                "highlight": false,
+                "impact": 0.00026030335042995267,
+                "name": "Height"
+            },
+            {
+                "description": "BMI contribution",
+                "highlight": false,
+                "impact": 0.0005166157515525624,
+                "name": "BMI"
+            },
+            {
+                "description": "Diabetes contribution",
+                "highlight": false,
+                "impact": -0.0007769191019825134,
+                "name": "Diabetes"
+            },
+            {
+                "description": "HighBP contribution",
+                "highlight": false,
+                "impact": -0.0004615462352996613,
+                "name": "HighBP"
+            },
+            {
+                "description": "HighCholesterol contribution",
+                "highlight": false,
+                "impact": 0.0011292070223443567,
+                "name": "HighCholesterol"
+            },
+            {
+                "description": "Anemia contribution",
+                "highlight": false,
+                "impact": -0.00066766078704468,
+                "name": "Anemia"
+            },
+            {
+                "description": "Depression\/Anxiety contribution",
+                "highlight": false,
+                "impact": -0.0016267306322395461,
+                "name": "Depression\/Anxiety"
+            },
+            {
+                "description": "HeartDisease contribution",
+                "highlight": false,
+                "impact": 0.00027598441176314637,
+                "name": "HeartDisease"
+            },
+            {
+                "description": "MenstrualIrregularities contribution",
+                "highlight": false,
+                "impact": 0.0013507462204764285,
+                "name": "MenstrualIrregularities"
+            },
+            {
+                "description": "AutoimmuneDiseases contribution",
+                "highlight": false,
+                "impact": 0.0006424552623044062,
+                "name": "AutoimmuneDiseases"
+            },
+            {
+                "description": "FH_Hypothyroidism contribution",
+                "highlight": true,
+                "impact": 0.0042413319145397825,
+                "name": "FH_Hypothyroidism"
+            },
+            {
+                "description": "FH_Hyperthyroidism contribution",
+                "highlight": true,
+                "impact": -0.00488378717684417,
+                "name": "FH_Hyperthyroidism"
+            },
+            {
+                "description": "FH_Goiter contribution",
+                "highlight": true,
+                "impact": -3.591815770794296e-5,
+                "name": "FH_Goiter"
+            },
+            {
+                "description": "FH_ThyroidCancer contribution",
+                "highlight": true,
+                "impact": -0.0020416631367829257,
+                "name": "FH_ThyroidCancer"
+            },
+            {
+                "description": "Sym_Fatigue contribution",
+                "highlight": false,
+                "impact": 0.002077581294490884,
+                "name": "Sym_Fatigue"
+            },
+            {
+                "description": "Sym_WeightChange contribution",
+                "highlight": false,
+                "impact": -0.0003718770406005096,
+                "name": "Sym_WeightChange"
+            },
+            {
+                "description": "Sym_Sensitivity contribution",
+                "highlight": false,
+                "impact": 0.0003486499232153039,
+                "name": "Sym_Sensitivity"
+            },
+            {
+                "description": "Sym_DrySkin contribution",
+                "highlight": false,
+                "impact": 2.3227117385220843e-5,
+                "name": "Sym_DrySkin"
+            },
+            {
+                "description": "Sym_HairLoss contribution",
+                "highlight": false,
+                "impact": 0.0011076127459365244,
+                "name": "Sym_HairLoss"
+            },
+            {
+                "description": "Sym_HeartRate contribution",
+                "highlight": false,
+                "impact": -0.006066546883075746,
+                "name": "Sym_HeartRate"
+            },
+            {
+                "description": "Sym_Digestion contribution",
+                "highlight": false,
+                "impact": 0.004958934137139234,
+                "name": "Sym_Digestion"
+            },
+            {
+                "description": "Sym_Depression contribution",
+                "highlight": false,
+                "impact": -1.2970705325994035e-5,
+                "name": "Sym_Depression"
+            },
+            {
+                "description": "Sym_IrregularPeriods contribution",
+                "highlight": false,
+                "impact": -8.690849066672775e-5,
+                "name": "Sym_IrregularPeriods"
+            },
+            {
+                "description": "Sym_NeckSwelling contribution",
+                "highlight": false,
+                "impact": 9.98791959927235e-5,
+                "name": "Sym_NeckSwelling"
+            },
+            {
+                "description": "TSH mIU\/L contribution",
+                "highlight": true,
+                "impact": -5.4116956091463536e-5,
+                "name": "TSH mIU\/L"
+            },
+            {
+                "description": "T3 ng\/dL contribution",
+                "highlight": false,
+                "impact": -0.0003782534164105526,
+                "name": "T3 ng\/dL"
+            },
+            {
+                "description": "T4 \u00b5g\/dL contribution",
+                "highlight": true,
+                "impact": 0.0004323703725020275,
+                "name": "T4 \u00b5g\/dL"
+            },
+            {
+                "description": "FTI contribution",
+                "highlight": false,
+                "impact": -0.0003840040752534255,
+                "name": "FTI"
+            },
+            {
+                "description": "image_prediction_encoded contribution",
+                "highlight": false,
+                "impact": -0.00035590205277805705,
+                "name": "image_prediction_encoded"
+            }
+        ]
+    }
+}

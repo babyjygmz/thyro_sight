@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment History - ThyroSight</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* History Page specific styles */
+        .history-container {
+            min-height: calc(100vh - 80px - 200px);
+            padding: 1rem;
+            background: linear-gradient(135deg, 
+                rgba(37, 99, 235, 0.05) 0%, 
+                rgba(16, 185, 129, 0.03) 50%, 
+                rgba(96, 165, 250, 0.04) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Remove extra space below footer */
+        .footer {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        .footer-bottom {
+            margin-bottom: 0 !important;
+            padding-bottom: 1rem !important;
+        }
+
+        body {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        /* Additional fixes for footer spacing */
+        main {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        .history-container {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        .history-content {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        /* Force footer to bottom with no extra space */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        /* Ensure main content doesn't overlap with fixed footer */
+        main {
+            padding-bottom: 80px; /* Add space for fixed footer */
+        }
+
+        .history-container {
+            min-height: calc(100vh - 80px - 80px); /* Account for header and footer */
+        }
+
+        .history-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(59,130,246,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .history-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.25rem 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .history-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .history-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 0.4rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .history-subtitle {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            opacity: 0.8;
+        }
+
+        .hero-underline {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+            gap: 0;
+        }
+
+        .underline-segment {
+            height: 4px;
+            width: 80px;
+            border-radius: 2px;
+        }
+
+        .underline-segment.blue {
+            background: var(--primary-blue);
+        }
+
+        .underline-segment.green {
+            background: var(--light-green);
+        }
+
+        /* Logo hover effects */
+        .logo-section a {
+            transition: all 0.3s ease;
+        }
+
+        .logo-section a:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.1);
+        }
+
+        .logo-section a:hover .logo-text {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Logout Modal Styles */
+        .logout-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .logout-modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .logout-modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--light-green));
+        }
+
+        .logout-modal-header {
+            padding: 2rem 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .logout-icon {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, var(--primary-blue), var(--light-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .logout-modal-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 0.8rem;
+        }
+
+        .logout-modal-header p {
+            color: var(--dark-gray);
+            opacity: 0.8;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .logout-modal-actions {
+            padding: 0 2rem 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .logout-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            min-width: 100px;
+        }
+
+        .logout-btn.cancel {
+            background: white;
+            color: var(--dark-gray);
+            border: 1px solid #d1d5db;
+        }
+
+        .logout-btn.cancel:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .logout-btn.confirm {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .logout-btn.confirm:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+
+
+        .history-table-container {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(248, 250, 252, 0.95) 100%);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.08),
+                0 8px 25px rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+            max-height: 550px;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+        }
+
+        .history-table-wrapper {
+            max-height: 350px;
+            overflow-y: auto;
+            border-radius: 12px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            position: relative;
+        }
+
+        .history-table-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .history-table-wrapper::-webkit-scrollbar-track {
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 4px;
+        }
+
+        .history-table-wrapper::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-green));
+            border-radius: 4px;
+        }
+
+        .history-table-wrapper::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--light-green), var(--primary-blue));
+        }
+
+        .history-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-green));
+            color: var(--white);
+            padding: 0.4rem 0.6rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .delete-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .delete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+
+        .history-table th:first-child {
+            border-top-left-radius: 12px;
+        }
+
+        .history-table th:last-child {
+            border-top-right-radius: 12px;
+        }
+
+        .history-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .history-table thead tr {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-green));
+        }
+
+        .history-table td {
+            padding: 0.4rem 0.6rem;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+            color: var(--dark-gray);
+        }
+
+        .history-table tr:hover {
+            background: rgba(37, 99, 235, 0.05);
+            transform: scale(1.01);
+            transition: all 0.3s ease;
+        }
+
+        .prediction-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            display: inline-block;
+            min-width: 80px;
+        }
+
+        .prediction-normal {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: var(--white);
+        }
+
+        .prediction-hypo {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: var(--white);
+        }
+
+        .prediction-hyper {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: var(--white);
+        }
+
+        .confidence-score {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .view-btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-green));
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            color: var(--dark-gray);
+            opacity: 0.7;
+        }
+
+        .no-data i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--light-gray);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--dark-gray);
+        }
+
+        .loading i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.98) 0%, 
+                rgba(248, 250, 252, 0.98) 100%);
+            border-radius: 24px;
+            padding: 2.5rem;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 
+                0 35px 100px rgba(0, 0, 0, 0.2),
+                0 20px 60px rgba(37, 99, 235, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(25px);
+            transform: scale(0.8) translateY(30px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-blue);
+        }
+
+        .assessment-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-section {
+            background: rgba(37, 99, 235, 0.05);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .detail-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .detail-value {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .shap-section {
+            background: rgba(16, 185, 129, 0.05);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .shap-section h3 {
+            color: var(--light-green);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .factors-display {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .factor-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .factor-item.contributing {
+            border-left-color: #ef4444;
+            background: linear-gradient(90deg, rgba(239, 68, 68, 0.05) 0%, white 100%);
+        }
+
+        .factor-item.suppressing {
+            border-left-color: #3b82f6;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.05) 0%, white 100%);
+        }
+
+        .factor-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .factor-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .factor-icon {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .factor-item.contributing .factor-icon {
+            color: #ef4444;
+        }
+
+        .factor-item.suppressing .factor-icon {
+            color: #3b82f6;
+        }
+
+        .factor-name {
+            font-weight: 600;
+            color: var(--dark-gray);
+            flex: 1;
+            text-align: left;
+        }
+
+        .factor-impact {
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 8px;
+        }
+
+        .factor-item.contributing .factor-impact {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .factor-item.suppressing .factor-impact {
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .factor-description {
+            color: var(--dark-gray);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            padding-left: 2rem;
+            text-align: left;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .history-container {
+                padding: 1rem;
+            }
+
+            .history-content {
+                padding: 0.25rem 1rem;
+            }
+
+            .history-title {
+                font-size: 2rem;
+            }
+
+            .history-table-container {
+                padding: 1rem;
+            }
+
+            .history-table-wrapper {
+                max-height: 400px;
+                overflow-x: auto;
+                overflow-y: auto;
+            }
+
+            .history-table {
+                min-width: 600px;
+            }
+
+            .assessment-details {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Creative Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <a href="homepage.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.8rem;">
+                    <div class="logo-icon">
+                        <img src="thy.png" alt="ThyroSight Logo" class="logo-image">
+                    </div>
+                    <h1 class="logo-text">ThyroSight</h1>
+                </a>
+            </div>
+            <nav class="nav-links" id="nav-links">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="health-assessment.html" class="nav-link">Health Assessment</a>
+                <a href="history.html" class="nav-link">History</a>
+            </nav>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="auth-buttons">
+                <a href="auth/logout.php" class="btn btn-outline">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="history-container">
+            <div class="history-content">
+                <div class="history-header">
+                    <h1 class="history-title">Assessment History</h1>
+                    <div class="hero-underline">
+                        <div class="underline-segment blue"></div>
+                        <div class="underline-segment green"></div>
+                    </div>
+                    <p class="history-subtitle">View all your thyroid health assessments and results</p>
+                </div>
+                
+                <div class="history-table-container">
+                    <div id="loading" class="loading">
+                        <i class="fas fa-spinner"></i>
+                        <p>Loading your assessment history...</p>
+                    </div>
+                    
+                    <div id="no-data" class="no-data" style="display: none;">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>No Assessments Found</h3>
+                        <p>You haven't completed any health assessments yet.</p>
+                        <a href="health-assessment.html" class="view-btn" style="margin-top: 1rem;">Start Your First Assessment</a>
+                    </div>
+                    
+                    <div class="history-table-wrapper">
+                        <table id="history-table" class="history-table" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Thyroid Prediction</th>
+                                    <th>Confidence Score</th>
+                                    <th>View</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-tbody">
+                                <!-- Data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Assessment Details Modal -->
+    <div class="modal-overlay" id="assessmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Assessment Details</h2>
+                <button class="close-btn" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="modal-body">
+                <!-- Modal content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 ThyroSight. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Logout Confirmation Modal -->
+    <div class="logout-modal-overlay" id="logoutModal" style="display: none;">
+        <div class="logout-modal">
+            <div class="logout-modal-header">
+                <div class="logout-icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                <h2>Confirm Logout</h2>
+                <p>Are you sure you want to logout from your ThyroSight account? You'll need to login again to access your dashboard.</p>
+            </div>
+            <div class="logout-modal-actions">
+                <button class="logout-btn cancel" onclick="hideLogoutModal()">Cancel</button>
+                <button class="logout-btn confirm" onclick="confirmLogout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="logout-modal-overlay" id="deleteModal" style="display: none;">
+        <div class="logout-modal">
+            <div class="logout-modal-header">
+                <div class="logout-icon" style="background: radial-gradient(circle, #ef4444, #dc2626);">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+                <h2>Delete Assessment</h2>
+                <p>Are you sure you want to remove this assessment from your history? This will only remove it from view and won't affect your database or dashboard statistics.</p>
+            </div>
+            <div class="logout-modal-actions">
+                <button class="logout-btn cancel" onclick="hideDeleteModal()">Cancel</button>
+                <button class="logout-btn confirm" style="background: #ef4444;" onclick="confirmDelete()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add logout functionality
+        document.querySelector('a[href="auth/logout.php"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            showLogoutModal();
+        });
+
+        // Show logout modal
+        function showLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'flex';
+        }
+
+        // Hide logout modal
+        function hideLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'none';
+        }
+
+        // Confirm logout
+        function confirmLogout() {
+            window.location.href = 'auth/logout.php';
+        }
+
+        // Delete functionality
+        let deleteFormId = null;
+
+        // Show delete modal
+        function showDeleteModal(formId) {
+            deleteFormId = formId;
+            document.getElementById('deleteModal').style.display = 'flex';
+        }
+
+        // Hide delete modal
+        function hideDeleteModal() {
+            deleteFormId = null;
+            document.getElementById('deleteModal').style.display = 'none';
+        }
+
+        // Confirm delete - removes from UI only, doesn't affect database
+        function confirmDelete() {
+            if (deleteFormId) {
+                // Find and remove the row from the table
+                const row = document.querySelector(`tr[data-form-id="${deleteFormId}"]`);
+                if (row) {
+                    row.style.transition = 'all 0.3s ease';
+                    row.style.opacity = '0';
+                    row.style.transform = 'translateX(-20px)';
+                    
+                    setTimeout(() => {
+                        row.remove();
+                        
+                        // Check if table is now empty
+                        const tbody = document.getElementById('history-tbody');
+                        if (tbody.children.length === 0) {
+                            document.getElementById('history-table').style.display = 'none';
+                            document.getElementById('no-data').style.display = 'block';
+                        }
+                    }, 300);
+                }
+                
+                hideDeleteModal();
+            }
+        }
+
+        // Check login status and load history
+        document.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+        });
+
+        // Check if user is logged in
+        function checkLoginStatus() {
+            fetch('check_login_status.php', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.logged_in) {
+                        loadAssessmentHistory();
+                    } else {
+                        window.location.href = 'auth/login.php';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking login status:', error);
+                    // Show error message instead of redirecting immediately
+                    const loading = document.getElementById('loading');
+                    loading.innerHTML = `
+                        <i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i>
+                        <p>Error checking login status: ${error.message}</p>
+                        <p>Please try refreshing the page or <a href="auth/login.php" style="color: var(--primary-blue);">login again</a></p>
+                        <button onclick="checkLoginStatus()" class="view-btn" style="margin-top: 1rem;">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    `;
+                });
+        }
+
+        // Load assessment history
+        function loadAssessmentHistory() {
+            fetch('get_assessment_history.php', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const loading = document.getElementById('loading');
+                    const noData = document.getElementById('no-data');
+                    const table = document.getElementById('history-table');
+                    const tbody = document.getElementById('history-tbody');
+
+                    loading.style.display = 'none';
+
+                    if (data.success && data.assessments && data.assessments.length > 0) {
+                        table.style.display = 'table';
+                        populateHistoryTable(data.assessments);
+                    } else {
+                        noData.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading history:', error);
+                    const loading = document.getElementById('loading');
+                    loading.innerHTML = `
+                        <i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i>
+                        <p>Error loading history: ${error.message}</p>
+                        <button onclick="loadAssessmentHistory()" class="view-btn" style="margin-top: 1rem;">
+                            <i class="fas fa-redo"></i> Try Again
+                        </button>
+                    `;
+                });
+        }
+
+        // Populate history table
+        function populateHistoryTable(assessments) {
+            const tbody = document.getElementById('history-tbody');
+            tbody.innerHTML = '';
+
+            assessments.forEach(assessment => {
+                // Debug log to check confidence score
+                console.log('Assessment:', assessment.form_id, 'Confidence:', assessment.confidence_score);
+                
+                // Ensure confidence score is a valid number with 1 decimal place
+                const confidenceScore = assessment.confidence_score !== null && assessment.confidence_score !== undefined 
+                    ? parseFloat(assessment.confidence_score).toFixed(1)
+                    : '0.0';
+                
+                const row = document.createElement('tr');
+                row.setAttribute('data-form-id', assessment.form_id);
+                row.innerHTML = `
+                    <td>${formatDate(assessment.assessment_date)}</td>
+                    <td><span class="prediction-badge prediction-${assessment.prediction}">${assessment.prediction.toUpperCase()}</span></td>
+                    <td><span class="confidence-score">${confidenceScore}%</span></td>
+                    <td><button class="view-btn" onclick="viewAssessment(${assessment.form_id})">View Details</button></td>
+                    <td><button class="delete-btn" onclick="showDeleteModal(${assessment.form_id})"><i class="fas fa-trash-alt"></i> Delete</button></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // View assessment details
+        function viewAssessment(formId) {
+            fetch(`get_assessment_details.php?form_id=${formId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        showAssessmentModal(data.assessment);
+                    } else {
+                        alert('Error loading assessment details: ' + (data.message || 'Unknown error'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading assessment details:', error);
+                    alert('Error loading assessment details: ' + error.message);
+                });
+        }
+
+ // Show assessment modal
+function showAssessmentModal(assessment) {
+    const modal = document.getElementById('assessmentModal');
+    const modalBody = document.getElementById('modal-body');
+
+    // Parse factors if they're stored as JSON string
+    let factors = [];
+    if (assessment.factors) {
+        try {
+            factors = typeof assessment.factors === 'string' ? JSON.parse(assessment.factors) : assessment.factors;
+        } catch (e) {
+            console.error('Error parsing factors:', e);
+        }
+    }
+
+    modalBody.innerHTML = `
+        <div class="assessment-details">
+            <div class="detail-section">
+                <h3><i class="fas fa-user"></i> Personal Information</h3>
+                <div class="detail-item">
+                    <span class="detail-label">Age:</span>
+                    <span class="detail-value">${assessment.age || 'N/A'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Gender:</span>
+                    <span class="detail-value">${assessment.gender ? assessment.gender.charAt(0).toUpperCase() + assessment.gender.slice(1) : 'N/A'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Assessment Date:</span>
+                    <span class="detail-value">${formatDate(assessment.assessment_date)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Prediction:</span>
+                    <span class="detail-value">
+                        <span class="prediction-badge prediction-${assessment.prediction}">
+                            ${assessment.prediction.toUpperCase()}
+                        </span>
+                    </span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Confidence Score:</span>
+                    <span class="detail-value">${assessment.confidence_score !== null && assessment.confidence_score !== undefined ? parseFloat(assessment.confidence_score).toFixed(1) : '0.0'}%</span>
+                </div>
+               
+            </div>
+            
+            <div class="detail-section">
+                <h3><i class="fas fa-flask"></i> Lab Results</h3>
+                <div class="detail-item">
+                    <span class="detail-label">TSH Test:</span>
+                    <span class="detail-value">${assessment.tsh}</span>
+                </div>
+                ${assessment.tsh === 'Yes' ? `
+                <div class="detail-item">
+                    <span class="detail-label">TSH Level:</span>
+                    <span class="detail-value">${assessment.tsh_level || 'N/A'}</span>
+                </div>
+                ` : ''}
+                <div class="detail-item">
+                    <span class="detail-label">T3 Test:</span>
+                    <span class="detail-value">${assessment.t3}</span>
+                </div>
+                ${assessment.t3 === 'Yes' ? `
+                <div class="detail-item">
+                    <span class="detail-label">T3 Level:</span>
+                    <span class="detail-value">${assessment.t3_level || 'N/A'}</span>
+                </div>
+                ` : ''}
+                <div class="detail-item">
+                    <span class="detail-label">T4 Test:</span>
+                    <span class="detail-value">${assessment.t4}</span>
+                </div>
+                ${assessment.t4 === 'Yes' ? `
+                <div class="detail-item">
+                    <span class="detail-label">T4 Level:</span>
+                    <span class="detail-value">${assessment.t4_level || 'N/A'}</span>
+                </div>
+                ` : ''}
+                <div class="detail-item">
+                    <span class="detail-label">T4 Uptake Test:</span>
+                    <span class="detail-value">${assessment.t4_uptake}</span>
+                </div>
+                ${assessment.t4_uptake === 'Yes' ? `
+                <div class="detail-item">
+                    <span class="detail-label">T4 Uptake Result:</span>
+                    <span class="detail-value">${assessment.t4_uptake_result || 'N/A'}</span>
+                </div>
+                ` : ''}
+                <div class="detail-item">
+                    <span class="detail-label">FTI Test:</span>
+                    <span class="detail-value">${assessment.fti}</span>
+                </div>
+                ${assessment.fti === 'Yes' ? `
+                <div class="detail-item">
+                    <span class="detail-label">FTI Result:</span>
+                    <span class="detail-value">${assessment.fti_result || 'N/A'}</span>
+                </div>
+                ` : ''}
+            </div>
+        </div>
+        
+        <div class="detail-section" style="grid-column: 1 / -1;">
+            <h3><i class="fas fa-notes-medical"></i>Medical History</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="detail-item">
+                    <span class="detail-label">Diabetes:</span>
+                    <span class="detail-value">${assessment.diabetes || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">High Blood Pressure:</span>
+                    <span class="detail-value">${assessment.high_blood_pressure || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">High Cholesterol:</span>
+                    <span class="detail-value">${assessment.high_cholesterol || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Anemia:</span>
+                    <span class="detail-value">${assessment.anemia || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Depression/Anxiety:</span>
+                    <span class="detail-value">${assessment.depression_anxiety || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Heart Disease:</span>
+                    <span class="detail-value">${assessment.heart_disease || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Menstrual Irregularities:</span>
+                    <span class="detail-value">${assessment.menstrual_irregularities || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Autoimmune Diseases:</span>
+                    <span class="detail-value">${assessment.autoimmune_diseases || 'No'}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section" style="grid-column: 1 / -1;">
+            <h3><i class="fas fa-users"></i> Family History</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="detail-item">
+                    <span class="detail-label">Hypothyroidism:</span>
+                    <span class="detail-value">${assessment.fh_hypothyroidism || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Hyperthyroidism:</span>
+                    <span class="detail-value">${assessment.fh_hyperthyroidism || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Goiter:</span>
+                    <span class="detail-value">${assessment.fh_goiter || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Thyroid Cancer:</span>
+                    <span class="detail-value">${assessment.fh_thyroid_cancer || 'No'}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section" style="grid-column: 1 / -1;">
+            <h3><i class="fas fa-heartbeat"></i> Current Symptoms</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="detail-item">
+                    <span class="detail-label">Fatigue:</span>
+                    <span class="detail-value">${assessment.sym_fatigue || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Weight Change:</span>
+                    <span class="detail-value">${assessment.sym_weight_change || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Dry Skin:</span>
+                    <span class="detail-value">${assessment.sym_dry_skin || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Hair Loss:</span>
+                    <span class="detail-value">${assessment.sym_hair_loss || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Heart Rate Changes:</span>
+                    <span class="detail-value">${assessment.sym_heart_rate || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Digestion Issues:</span>
+                    <span class="detail-value">${assessment.sym_digestion || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Irregular Periods:</span>
+                    <span class="detail-value">${assessment.sym_irregular_periods || 'No'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Neck Swelling:</span>
+                    <span class="detail-value">${assessment.sym_neck_swelling || 'No'}</span>
+                </div>
+            </div>
+        </div>
+
+        ${factors.length > 0 ? `
+        <div class="shap-section" style="grid-column: 1 / -1; margin-top: 1rem;">
+            <h3><i class="fas fa-chart-bar"></i> Key Contributing Factors</h3>
+            <div class="factors-display">
+                ${factors.map(factor => `
+                    <div class="factor-item ${factor.type}">
+                        <div class="factor-header">
+                            <span class="factor-icon">${factor.type === 'contributing' ? '▲' : '▼'}</span>
+                            <span class="factor-name">${factor.name}</span>
+                            <span class="factor-impact">${factor.impact > 0 ? '+' : ''}${factor.impact}</span>
+                        </div>
+                        <div class="factor-description">${factor.description}</div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+        ` : ''}
+     
+    `;
+
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+
+
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('assessmentModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('assessmentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Add logout functionality
+        document.querySelector('a[href="auth/logout.php"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'auth/logout.php';
+            }
+        });
+        
+        // Mobile Navigation Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+            
+            if (mobileMenuToggle && navLinks) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('show');
+                });
+                
+                // Close mobile menu when clicking on a link
+                const navLinkElements = navLinks.querySelectorAll('.nav-link');
+                navLinkElements.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navLinks.classList.remove('show');
+                    });
+                });
+                
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navLinks.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                        navLinks.classList.remove('show');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

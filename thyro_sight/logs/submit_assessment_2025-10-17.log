@@ -1,0 +1,1732 @@
+{
+    "timestamp": "2025-10-17 02:51:27",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 0,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 0,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 0,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Hybrid (Lab-Assisted)",
+        "c_score": 94,
+        "shap_values": [
+            {
+                "highlight": false,
+                "impact": 0.65,
+                "name": "Diabetes"
+            },
+            {
+                "highlight": false,
+                "impact": -0.61,
+                "name": "HighBloodPressure"
+            },
+            {
+                "highlight": false,
+                "impact": -0.04,
+                "name": "HighCholesterol"
+            },
+            {
+                "highlight": false,
+                "impact": 0.63,
+                "name": "Anemia"
+            },
+            {
+                "highlight": false,
+                "impact": -0.12,
+                "name": "DepressionAnxiety"
+            },
+            {
+                "highlight": false,
+                "impact": -0.51,
+                "name": "HeartDisease"
+            },
+            {
+                "highlight": false,
+                "impact": 3.3,
+                "name": "MenstrualIrregularities"
+            },
+            {
+                "highlight": false,
+                "impact": -3.34,
+                "name": "AutoimmuneDiseases"
+            },
+            {
+                "highlight": true,
+                "impact": 0.04,
+                "name": "FH_Hypothyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": 0.37,
+                "name": "FH_Hyperthyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": -0.32,
+                "name": "FH_Goiter"
+            },
+            {
+                "highlight": false,
+                "impact": -0.05,
+                "name": "FH_ThyroidCancer"
+            },
+            {
+                "highlight": true,
+                "impact": 3.39,
+                "name": "Sym_Fatigue"
+            },
+            {
+                "highlight": false,
+                "impact": -0.84,
+                "name": "Sym_WeightChange"
+            },
+            {
+                "highlight": false,
+                "impact": -2.55,
+                "name": "Sym_DrySkin"
+            },
+            {
+                "highlight": false,
+                "impact": 2.57,
+                "name": "Sym_HairLoss"
+            },
+            {
+                "highlight": false,
+                "impact": -1.78,
+                "name": "Sym_HeartRate"
+            },
+            {
+                "highlight": false,
+                "impact": -0.79,
+                "name": "Sym_Digestion"
+            },
+            {
+                "highlight": false,
+                "impact": 1.09,
+                "name": "Sym_IrregularPeriods"
+            },
+            {
+                "highlight": false,
+                "impact": 0.09,
+                "name": "Sym_NeckSwelling"
+            },
+            {
+                "highlight": true,
+                "impact": -1.18,
+                "name": "Age"
+            },
+            {
+                "highlight": false,
+                "impact": 1.93,
+                "name": "Sex"
+            },
+            {
+                "highlight": true,
+                "impact": -1.98,
+                "name": "TSH mIU\/L"
+            },
+            {
+                "highlight": true,
+                "impact": 0.05,
+                "name": "T3 ng\/dL"
+            },
+            {
+                "highlight": true,
+                "impact": 0.42,
+                "name": "T4 ng\/dL"
+            },
+            {
+                "highlight": true,
+                "impact": -0.41,
+                "name": "FTI"
+            }
+        ]
+    }
+}
+{
+    "timestamp": "2025-10-17 06:30:00",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 0,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 0,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 0,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Symptom-Only",
+        "c_score": 84,
+        "shap_values": [],
+        "rf_prediction": "Normal",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 06:36:28",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 1,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 0,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 1,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Symptom-Only",
+        "c_score": 83,
+        "shap_values": [],
+        "rf_prediction": "Normal",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 06:39:16",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 1,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 0,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 1,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Symptom-Only",
+        "c_score": 83,
+        "shap_values": [],
+        "rf_prediction": "Normal",
+        "svm_prediction": "Normal",
+        "gb_prediction": "Normal",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 06:39:38",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 1,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 1,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 0,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 1,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": 0.4,
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Hybrid (Lab-Assisted)",
+        "c_score": 66,
+        "shap_values": [
+            {
+                "highlight": true,
+                "impact": 1.33,
+                "name": "Age"
+            },
+            {
+                "highlight": false,
+                "impact": -2.58,
+                "name": "Sex"
+            },
+            {
+                "highlight": true,
+                "impact": 1.26,
+                "name": "Sym_Fatigue"
+            },
+            {
+                "highlight": false,
+                "impact": 0.38,
+                "name": "Sym_WeightChange"
+            },
+            {
+                "highlight": false,
+                "impact": -0.26,
+                "name": "Sym_DrySkin"
+            },
+            {
+                "highlight": false,
+                "impact": -0.11,
+                "name": "Sym_HairLoss"
+            },
+            {
+                "highlight": false,
+                "impact": 6.46,
+                "name": "Sym_HeartRate"
+            },
+            {
+                "highlight": false,
+                "impact": -3.61,
+                "name": "Sym_Digestion"
+            },
+            {
+                "highlight": false,
+                "impact": -2.85,
+                "name": "Sym_IrregularPeriods"
+            },
+            {
+                "highlight": false,
+                "impact": 5.33,
+                "name": "Sym_NeckSwelling"
+            },
+            {
+                "highlight": false,
+                "impact": -2.32,
+                "name": "DepressionAnxiety"
+            },
+            {
+                "highlight": false,
+                "impact": -3.01,
+                "name": "AutoimmuneDiseases"
+            },
+            {
+                "highlight": false,
+                "impact": 2.17,
+                "name": "FH_Hypothyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": -2.6,
+                "name": "FH_Hyperthyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": 0.42,
+                "name": "FH_Goiter"
+            },
+            {
+                "highlight": false,
+                "impact": 0.82,
+                "name": "FH_ThyroidCancer"
+            },
+            {
+                "highlight": true,
+                "impact": -1.03,
+                "name": "TSH mIU\/L"
+            },
+            {
+                "highlight": true,
+                "impact": 0.21,
+                "name": "T3 ng\/dL"
+            },
+            {
+                "highlight": true,
+                "impact": -1.43,
+                "name": "T4 (ng\/dL)"
+            },
+            {
+                "highlight": true,
+                "impact": -0.19,
+                "name": "FTI"
+            },
+            {
+                "highlight": false,
+                "impact": 1.62,
+                "name": "T4 Uptake"
+            }
+        ],
+        "rf_prediction": "Normal",
+        "svm_prediction": "Hypothyroid",
+        "gb_prediction": "Hypothyroid",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 06:40:14",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 1,
+            "t3": 1,
+            "t4": 1,
+            "t4-uptake": 1,
+            "fti": 1,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 1,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 0,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 1,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": 0.4,
+            "t3Value": 252,
+            "t4Value": 15,
+            "t4-uptakeValue": "28",
+            "ftiValue": 15,
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Hybrid (Lab-Assisted)",
+        "c_score": 79,
+        "shap_values": [
+            {
+                "highlight": true,
+                "impact": 0.41,
+                "name": "Age"
+            },
+            {
+                "highlight": false,
+                "impact": -1.56,
+                "name": "Sex"
+            },
+            {
+                "highlight": true,
+                "impact": 1.16,
+                "name": "Sym_Fatigue"
+            },
+            {
+                "highlight": false,
+                "impact": 0.27,
+                "name": "Sym_WeightChange"
+            },
+            {
+                "highlight": false,
+                "impact": -0.16,
+                "name": "Sym_DrySkin"
+            },
+            {
+                "highlight": false,
+                "impact": -0.12,
+                "name": "Sym_HairLoss"
+            },
+            {
+                "highlight": false,
+                "impact": 6.29,
+                "name": "Sym_HeartRate"
+            },
+            {
+                "highlight": false,
+                "impact": -1.45,
+                "name": "Sym_Digestion"
+            },
+            {
+                "highlight": false,
+                "impact": -4.84,
+                "name": "Sym_IrregularPeriods"
+            },
+            {
+                "highlight": false,
+                "impact": 5.88,
+                "name": "Sym_NeckSwelling"
+            },
+            {
+                "highlight": false,
+                "impact": -0.92,
+                "name": "DepressionAnxiety"
+            },
+            {
+                "highlight": false,
+                "impact": -4.96,
+                "name": "AutoimmuneDiseases"
+            },
+            {
+                "highlight": false,
+                "impact": 0.96,
+                "name": "FH_Hypothyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": -1.27,
+                "name": "FH_Hyperthyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": 0.31,
+                "name": "FH_Goiter"
+            },
+            {
+                "highlight": false,
+                "impact": 0.35,
+                "name": "FH_ThyroidCancer"
+            },
+            {
+                "highlight": true,
+                "impact": -0.4,
+                "name": "TSH mIU\/L"
+            },
+            {
+                "highlight": true,
+                "impact": 0.05,
+                "name": "T3 ng\/dL"
+            },
+            {
+                "highlight": true,
+                "impact": -2.52,
+                "name": "T4 (ng\/dL)"
+            },
+            {
+                "highlight": true,
+                "impact": 0.06,
+                "name": "FTI"
+            },
+            {
+                "highlight": false,
+                "impact": 2.47,
+                "name": "T4 Uptake"
+            }
+        ],
+        "rf_prediction": "Normal",
+        "svm_prediction": "Normal",
+        "gb_prediction": "Normal",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 06:42:57",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 1,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 0,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 1,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Symptom-Only",
+        "c_score": 83,
+        "shap_values": [],
+        "rf_prediction": "Normal",
+        "svm_prediction": "Normal",
+        "gb_prediction": "Normal",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 07:18:47",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 1,
+            "FH_Hyperthyroidism": 0,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 1,
+            "Sym_WeightChange": 1,
+            "Sym_DrySkin": 1,
+            "Sym_HairLoss": 1,
+            "Sym_HeartRate": 0,
+            "Sym_Digestion": 1,
+            "Sym_IrregularPeriods": 1,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "hypo",
+        "mode": "Symptom-Only",
+        "c_score": 81,
+        "shap_values": [],
+        "rf_prediction": "Hypothyroid",
+        "svm_prediction": "Hypothyroid",
+        "gb_prediction": "Hypothyroid",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 07:20:10",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 0,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 1,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 1,
+            "Sym_HeartRate": 1,
+            "Sym_Digestion": 1,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 1,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "hypo",
+        "mode": "Symptom-Only",
+        "c_score": 91,
+        "shap_values": [],
+        "rf_prediction": "Hypothyroid",
+        "svm_prediction": "Hyperthyroid",
+        "gb_prediction": "Hyperthyroid",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 07:20:23",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 1,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 1,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 1,
+            "Sym_HeartRate": 1,
+            "Sym_Digestion": 1,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 1,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "hyper",
+        "mode": "Symptom-Only",
+        "c_score": 81,
+        "shap_values": [],
+        "rf_prediction": "Hyperthyroid",
+        "svm_prediction": "Hyperthyroid",
+        "gb_prediction": "Hyperthyroid",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 07:20:49",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 1,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 1,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 0,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Symptom-Only",
+        "c_score": 89,
+        "shap_values": [],
+        "rf_prediction": "Normal",
+        "svm_prediction": "Normal",
+        "gb_prediction": "Normal",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 07:37:04",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 1,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 1,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 0,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Symptom-Only",
+        "c_score": 89,
+        "shap_values": [
+            {
+                "highlight": true,
+                "impact": -1.52,
+                "name": "Age"
+            },
+            {
+                "highlight": false,
+                "impact": -4.35,
+                "name": "Sex"
+            },
+            {
+                "highlight": true,
+                "impact": 5.87,
+                "name": "Sym_Fatigue"
+            },
+            {
+                "highlight": false,
+                "impact": 0.92,
+                "name": "Sym_WeightChange"
+            },
+            {
+                "highlight": false,
+                "impact": -0.46,
+                "name": "Sym_DrySkin"
+            },
+            {
+                "highlight": false,
+                "impact": -0.46,
+                "name": "Sym_HairLoss"
+            },
+            {
+                "highlight": false,
+                "impact": 4.72,
+                "name": "Sym_HeartRate"
+            },
+            {
+                "highlight": false,
+                "impact": -3.27,
+                "name": "Sym_Digestion"
+            },
+            {
+                "highlight": false,
+                "impact": -1.44,
+                "name": "Sym_IrregularPeriods"
+            },
+            {
+                "highlight": false,
+                "impact": -5.83,
+                "name": "Sym_NeckSwelling"
+            },
+            {
+                "highlight": false,
+                "impact": 1.96,
+                "name": "DepressionAnxiety"
+            },
+            {
+                "highlight": false,
+                "impact": 3.87,
+                "name": "AutoimmuneDiseases"
+            },
+            {
+                "highlight": false,
+                "impact": 4.12,
+                "name": "FH_Hypothyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": -4.37,
+                "name": "FH_Hyperthyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": 0.25,
+                "name": "FH_Goiter"
+            },
+            {
+                "highlight": false,
+                "impact": 0.84,
+                "name": "FH_ThyroidCancer"
+            }
+        ],
+        "rf_prediction": "Normal",
+        "svm_prediction": "Normal",
+        "gb_prediction": "Normal",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 08:06:26",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 0,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 0,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 0,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Symptom-Only",
+        "c_score": 84,
+        "shap_values": [
+            {
+                "highlight": true,
+                "impact": -1.04,
+                "name": "Age"
+            },
+            {
+                "highlight": false,
+                "impact": -4.47,
+                "name": "Sex"
+            },
+            {
+                "highlight": true,
+                "impact": 5.51,
+                "name": "Sym_Fatigue"
+            },
+            {
+                "highlight": false,
+                "impact": 0.82,
+                "name": "Sym_WeightChange"
+            },
+            {
+                "highlight": false,
+                "impact": -0.25,
+                "name": "Sym_DrySkin"
+            },
+            {
+                "highlight": false,
+                "impact": -0.57,
+                "name": "Sym_HairLoss"
+            },
+            {
+                "highlight": false,
+                "impact": 4.72,
+                "name": "Sym_HeartRate"
+            },
+            {
+                "highlight": false,
+                "impact": -3.02,
+                "name": "Sym_Digestion"
+            },
+            {
+                "highlight": false,
+                "impact": -1.7,
+                "name": "Sym_IrregularPeriods"
+            },
+            {
+                "highlight": false,
+                "impact": 6.18,
+                "name": "Sym_NeckSwelling"
+            },
+            {
+                "highlight": false,
+                "impact": -1.78,
+                "name": "DepressionAnxiety"
+            },
+            {
+                "highlight": false,
+                "impact": -4.4,
+                "name": "AutoimmuneDiseases"
+            },
+            {
+                "highlight": false,
+                "impact": 5.03,
+                "name": "FH_Hypothyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": -4.72,
+                "name": "FH_Hyperthyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": -0.31,
+                "name": "FH_Goiter"
+            },
+            {
+                "highlight": false,
+                "impact": 1.04,
+                "name": "FH_ThyroidCancer"
+            }
+        ],
+        "rf_prediction": "Normal",
+        "svm_prediction": "Normal",
+        "gb_prediction": "Normal",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 08:28:46",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 0,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 0,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 0,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Auto",
+        "c_score": 84,
+        "shap_values": [
+            {
+                "highlight": true,
+                "impact": -1.04,
+                "name": "Age"
+            },
+            {
+                "highlight": false,
+                "impact": -4.47,
+                "name": "Sex"
+            },
+            {
+                "highlight": true,
+                "impact": 5.51,
+                "name": "Sym_Fatigue"
+            },
+            {
+                "highlight": false,
+                "impact": 0.82,
+                "name": "Sym_WeightChange"
+            },
+            {
+                "highlight": false,
+                "impact": -0.25,
+                "name": "Sym_DrySkin"
+            },
+            {
+                "highlight": false,
+                "impact": -0.57,
+                "name": "Sym_HairLoss"
+            },
+            {
+                "highlight": false,
+                "impact": 4.72,
+                "name": "Sym_HeartRate"
+            },
+            {
+                "highlight": false,
+                "impact": -3.02,
+                "name": "Sym_Digestion"
+            },
+            {
+                "highlight": false,
+                "impact": -1.7,
+                "name": "Sym_IrregularPeriods"
+            },
+            {
+                "highlight": false,
+                "impact": 6.18,
+                "name": "Sym_NeckSwelling"
+            },
+            {
+                "highlight": false,
+                "impact": -1.78,
+                "name": "DepressionAnxiety"
+            },
+            {
+                "highlight": false,
+                "impact": -4.4,
+                "name": "AutoimmuneDiseases"
+            },
+            {
+                "highlight": false,
+                "impact": 5.03,
+                "name": "FH_Hypothyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": -4.72,
+                "name": "FH_Hyperthyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": -0.31,
+                "name": "FH_Goiter"
+            },
+            {
+                "highlight": false,
+                "impact": 1.04,
+                "name": "FH_ThyroidCancer"
+            }
+        ],
+        "rf_prediction": "Normal",
+        "svm_prediction": "Normal",
+        "gb_prediction": "Normal",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 08:29:32",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 0,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 0,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 0,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Auto",
+        "c_score": 84,
+        "shap_values": [
+            {
+                "highlight": true,
+                "impact": -1.04,
+                "name": "Age"
+            },
+            {
+                "highlight": false,
+                "impact": -4.47,
+                "name": "Sex"
+            },
+            {
+                "highlight": true,
+                "impact": 5.51,
+                "name": "Sym_Fatigue"
+            },
+            {
+                "highlight": false,
+                "impact": 0.82,
+                "name": "Sym_WeightChange"
+            },
+            {
+                "highlight": false,
+                "impact": -0.25,
+                "name": "Sym_DrySkin"
+            },
+            {
+                "highlight": false,
+                "impact": -0.57,
+                "name": "Sym_HairLoss"
+            },
+            {
+                "highlight": false,
+                "impact": 4.72,
+                "name": "Sym_HeartRate"
+            },
+            {
+                "highlight": false,
+                "impact": -3.02,
+                "name": "Sym_Digestion"
+            },
+            {
+                "highlight": false,
+                "impact": -1.7,
+                "name": "Sym_IrregularPeriods"
+            },
+            {
+                "highlight": false,
+                "impact": 6.18,
+                "name": "Sym_NeckSwelling"
+            },
+            {
+                "highlight": false,
+                "impact": -1.78,
+                "name": "DepressionAnxiety"
+            },
+            {
+                "highlight": false,
+                "impact": -4.4,
+                "name": "AutoimmuneDiseases"
+            },
+            {
+                "highlight": false,
+                "impact": 5.03,
+                "name": "FH_Hypothyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": -4.72,
+                "name": "FH_Hyperthyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": -0.31,
+                "name": "FH_Goiter"
+            },
+            {
+                "highlight": false,
+                "impact": 1.04,
+                "name": "FH_ThyroidCancer"
+            }
+        ],
+        "rf_prediction": "Normal",
+        "svm_prediction": "Normal",
+        "gb_prediction": "Normal",
+        "cnn_prediction": "Hypothyroid"
+    }
+}
+{
+    "timestamp": "2025-10-17 08:30:49",
+    "user_id": "1",
+    "received_input": {
+        "form_data": {
+            "thyroxine": 0,
+            "advised-thyroxine": 0,
+            "antithyroid": 0,
+            "illness": 0,
+            "pregnant": 0,
+            "surgery": 0,
+            "radioactive": 0,
+            "hypo-suspected": 0,
+            "hyper-suspected": 0,
+            "lithium": 0,
+            "goitre": 0,
+            "tumor": 0,
+            "hypopituitarism": 0,
+            "psychiatric": 0,
+            "tsh": 0,
+            "t3": 0,
+            "t4": 0,
+            "t4-uptake": 0,
+            "fti": 0,
+            "FH_Hypothyroidism": 0,
+            "FH_Hyperthyroidism": 0,
+            "FH_Goiter": 0,
+            "FH_ThyroidCancer": 0,
+            "Sym_Fatigue": 0,
+            "Sym_WeightChange": 0,
+            "Sym_DrySkin": 0,
+            "Sym_HairLoss": 0,
+            "Sym_HeartRate": 0,
+            "Sym_Digestion": 0,
+            "Sym_IrregularPeriods": 0,
+            "Sym_NeckSwelling": 0,
+            "Diabetes": 0,
+            "HighBloodPressure": 0,
+            "HighCholesterol": 0,
+            "Anemia": 0,
+            "DepressionAnxiety": 0,
+            "HeartDisease": 0,
+            "MenstrualIrregularities": 0,
+            "AutoimmuneDiseases": 0,
+            "tshValue": "",
+            "t3Value": "",
+            "t4Value": "",
+            "t4-uptakeValue": "",
+            "ftiValue": "",
+            "age": 27,
+            "gender": 1
+        },
+        "prediction": "normal",
+        "mode": "Symptom-Only",
+        "c_score": 84,
+        "shap_values": [
+            {
+                "highlight": true,
+                "impact": -1.04,
+                "name": "Age"
+            },
+            {
+                "highlight": false,
+                "impact": -4.47,
+                "name": "Sex"
+            },
+            {
+                "highlight": true,
+                "impact": 5.51,
+                "name": "Sym_Fatigue"
+            },
+            {
+                "highlight": false,
+                "impact": 0.82,
+                "name": "Sym_WeightChange"
+            },
+            {
+                "highlight": false,
+                "impact": -0.25,
+                "name": "Sym_DrySkin"
+            },
+            {
+                "highlight": false,
+                "impact": -0.57,
+                "name": "Sym_HairLoss"
+            },
+            {
+                "highlight": false,
+                "impact": 4.72,
+                "name": "Sym_HeartRate"
+            },
+            {
+                "highlight": false,
+                "impact": -3.02,
+                "name": "Sym_Digestion"
+            },
+            {
+                "highlight": false,
+                "impact": -1.7,
+                "name": "Sym_IrregularPeriods"
+            },
+            {
+                "highlight": false,
+                "impact": 6.18,
+                "name": "Sym_NeckSwelling"
+            },
+            {
+                "highlight": false,
+                "impact": -1.78,
+                "name": "DepressionAnxiety"
+            },
+            {
+                "highlight": false,
+                "impact": -4.4,
+                "name": "AutoimmuneDiseases"
+            },
+            {
+                "highlight": false,
+                "impact": 5.03,
+                "name": "FH_Hypothyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": -4.72,
+                "name": "FH_Hyperthyroidism"
+            },
+            {
+                "highlight": false,
+                "impact": -0.31,
+                "name": "FH_Goiter"
+            },
+            {
+                "highlight": false,
+                "impact": 1.04,
+                "name": "FH_ThyroidCancer"
+            }
+        ],
+        "rf_prediction": "Normal",
+        "svm_prediction": "Normal",
+        "gb_prediction": "Normal",
+        "cnn_prediction": "Hypothyroid"
+    }
+}

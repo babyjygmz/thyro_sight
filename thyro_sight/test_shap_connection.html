@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHAP Connection Test - ThyroSight</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2563eb;
+            text-align: center;
+        }
+        h2 {
+            color: #1e40af;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        .prediction-box {
+            background: linear-gradient(135deg, #3b82f6, #10b981);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .factor-item {
+            background: #f9fafb;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+        .factor-item.positive {
+            border-left-color: #10b981;
+        }
+        .factor-item.negative {
+            border-left-color: #ef4444;
+        }
+        .factor-name {
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+        .factor-impact {
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        .log-output {
+            background: #1f2937;
+            color: #10b981;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔬 SHAP Connection Test</h1>
+    
+    <div class="test-section">
+        <h2>Test Controls</h2>
+        <button onclick="testHypothyroid()">Test Hypothyroid Prediction</button>
+        <button onclick="testHyperthyroid()">Test Hyperthyroid Prediction</button>
+        <button onclick="testNormal()">Test Normal Prediction</button>
+        <button onclick="clearResults()">Clear Results</button>
+    </div>
+
+    <div class="test-section" id="results-section" style="display: none;">
+        <h2>Test Results</h2>
+        <div id="prediction-display"></div>
+        <div id="factors-display"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Console Log</h2>
+        <div class="log-output" id="log-output"></div>
+    </div>
+
+    <script src="enhanced_shap_factors.js"></script>
+    <script>
+        // Mock form data for testing
+        function getMockFormData(condition) {
+            const baseData = {
+                age: 35,
+                gender: 'female',
+                tsh: 'yes',
+                t3: 'yes',
+                t4: 'yes',
+                diabetes: 'no',
+                high_blood_pressure: 'no',
+                high_cholesterol: 'no',
+                anemia: 'no',
+                depression_anxiety: 'no',
+                heart_disease: 'no',
+                menstrual_irregularities: 'no',
+                autoimmune_diseases: 'no',
+                fh_hypothyroidism: 'no',
+                fh_hyperthyroidism: 'no',
+                fh_goiter: 'no',
+                fh_thyroid_cancer: 'no',
+                sym_fatigue: 'no',
+                sym_weight_change: 'no',
+                sym_dry_skin: 'no',
+                sym_hair_loss: 'no',
+                sym_heart_rate: 'no',
+                sym_digestion: 'no',
+                sym_irregular_periods: 'no',
+                sym_neck_swelling: 'no'
+            };
+
+            if (condition === 'hypo') {
+                baseData.tshValue = 8.5;
+                baseData.t3Value = 70;
+                baseData.t4Value = 4.0;
+                baseData.sym_fatigue = 'yes';
+                baseData.sym_weight_change = 'yes';
+                baseData.high_cholesterol = 'yes';
+                baseData.depression_anxiety = 'yes';
+            } else if (condition === 'hyper') {
+                baseData.tshValue = 0.2;
+                baseData.t3Value = 220;
+                baseData.t4Value = 14.0;
+                baseData.sym_heart_rate = 'yes';
+                baseData.sym_weight_change = 'yes';
+                baseData.high_blood_pressure = 'yes';
+                baseData.depression_anxiety = 'yes';
+            } else {
+                baseData.tshValue = 2.0;
+                baseData.t3Value = 120;
+                baseData.t4Value = 8.0;
+            }
+
+            return baseData;
+        }
+
+        // Override getFormData for testing
+        window.getFormData = function() {
+            return window.currentTestData || {};
+        };
+
+        // Logging function
+        function log(message, type = 'info') {
+            const logOutput = document.getElementById('log-output');
+            const timestamp = new Date().toLocaleTimeString();
+            const prefix = type === 'error' ? '❌' : type === 'success' ? '✅' : type === 'warning' ? '⚠️' : 'ℹ️';
+            logOutput.textContent += `[${timestamp}] ${prefix} ${message}\n`;
+            logOutput.scrollTop = logOutput.scrollHeight;
+            console.log(message);
+        }
+
+        function testCondition(condition, conditionName) {
+            log(`\n${'='.repeat(60)}`, 'info');
+            log(`Testing ${conditionName} Prediction`, 'info');
+            log('='.repeat(60), 'info');
+
+            // Set mock data
+            window.currentTestData = getMockFormData(condition);
+            log(`Mock form data set for ${condition}`, 'success');
+
+            // Generate SHAP factors
+            const age = 35;
+            const shapFactors = generateEnhancedSHAPFactors(condition, age, []);
+            
+            log(`Generated ${shapFactors.length} SHAP factors`, 'success');
+
+            // Separate positive and negative factors
+            const positives = shapFactors.filter(f => f.type === 'positive');
+            const negatives = shapFactors.filter(f => f.type === 'negative');
+
+            log(`Positive factors: ${positives.length}`, 'info');
+            log(`Negative factors: ${negatives.length}`, 'info');
+
+            // Display results
+            displayTestResults(condition, conditionName, positives, negatives);
+
+            // Verify connection
+            log('\n✅ VERIFICATION:', 'success');
+            log(`   Prediction: ${conditionName}`, 'info');
+            log(`   Condition Code: ${condition}`, 'info');
+            log(`   Total Factors: ${shapFactors.length}`, 'info');
+            log(`   Connection Status: ✅ CONNECTED`, 'success');
+            
+            if (positives.length > 0) {
+                log('\n   Top Contributing Factors:', 'info');
+                positives.slice(0, 3).forEach((f, i) => {
+                    log(`      ${i+1}. ${f.name}: +${Math.abs(f.impact)}%`, 'info');
+                });
+            }
+            
+            if (negatives.length > 0) {
+                log('\n   Top Suppressing Factors:', 'info');
+                negatives.slice(0, 3).forEach((f, i) => {
+                    log(`      ${i+1}. ${f.name}: -${Math.abs(f.impact)}%`, 'info');
+                });
+            }
+        }
+
+        function displayTestResults(condition, conditionName, positives, negatives) {
+            const resultsSection = document.getElementById('results-section');
+            const predictionDisplay = document.getElementById('prediction-display');
+            const factorsDisplay = document.getElementById('factors-display');
+
+            resultsSection.style.display = 'block';
+
+            // Display prediction
+            predictionDisplay.innerHTML = `
+                <div class="prediction-box">
+                    🎯 Prediction: ${conditionName}
+                    <br>
+                    <small style="opacity: 0.9;">Condition Code: ${condition}</small>
+                </div>
+            `;
+
+            // Display factors
+            let factorsHTML = '<h3>Contributing Factors (Supporting Prediction)</h3>';
+            if (positives.length === 0) {
+                factorsHTML += '<p style="color: #6b7280;">No contributing factors found</p>';
+            } else {
+                positives.forEach(factor => {
+                    factorsHTML += `
+                        <div class="factor-item positive">
+                            <div class="factor-name">✅ ${factor.name}</div>
+                            <div class="factor-impact">Impact: +${Math.abs(factor.impact)}%</div>
+                            <div style="color: #4b5563; margin-top: 5px; font-size: 0.9em;">${factor.description}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            factorsHTML += '<h3 style="margin-top: 30px;">Suppressing Factors (Contradicting Prediction)</h3>';
+            if (negatives.length === 0) {
+                factorsHTML += '<p style="color: #6b7280;">No suppressing factors found</p>';
+            } else {
+                negatives.forEach(factor => {
+                    factorsHTML += `
+                        <div class="factor-item negative">
+                            <div class="factor-name">❌ ${factor.name}</div>
+                            <div class="factor-impact">Impact: -${Math.abs(factor.impact)}%</div>
+                            <div style="color: #4b5563; margin-top: 5px; font-size: 0.9em;">${factor.description}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            factorsDisplay.innerHTML = factorsHTML;
+        }
+
+        function testHypothyroid() {
+            testCondition('hypo', 'HYPOTHYROIDISM');
+        }
+
+        function testHyperthyroid() {
+            testCondition('hyper', 'HYPERTHYROIDISM');
+        }
+
+        function testNormal() {
+            testCondition('normal', 'NORMAL THYROID FUNCTION');
+        }
+
+        function clearResults() {
+            document.getElementById('results-section').style.display = 'none';
+            document.getElementById('log-output').textContent = '';
+            log('Results cleared', 'info');
+        }
+
+        // Initial log
+        log('SHAP Connection Test Ready', 'success');
+        log('Click a test button to verify prediction-SHAP connection', 'info');
+    </script>
+</body>
+</html>

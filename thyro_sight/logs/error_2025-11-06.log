@@ -1,0 +1,5 @@
+[17:51:09] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'thydb.result' doesn't exist
+[17:53:46] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'thydb.result' doesn't exist
+[17:55:56] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'thydb.result' doesn't exist
+[17:56:59] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mode' in 'field list'
+[17:57:17] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mode' in 'field list'

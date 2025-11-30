@@ -1,0 +1,42 @@
+services:
+  # Python Flask Backend for ML predictions
+  - type: web
+    name: thyrosight-ml-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -b 0.0.0.0:$PORT flask_api_with_shap_example:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+    
+  # PHP Frontend and API
+  - type: web
+    name: thyrosight-frontend
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: thyrosight-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: thyrosight-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: thyrosight-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: thyrosight-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: thyrosight-db
+          property: password
+
+databases:
+  - name: thyrosight-db
+    databaseName: thydb
+    user: thyrosight_user

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThyroSight Deployment Helper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+        
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .method-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .method-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+        
+        .method-card h2 {
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .method-card .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .method-card ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .method-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .method-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        
+        .btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.05);
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            display: none;
+        }
+        
+        .instructions.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .instructions h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .step {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            display: block;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 ThyroSight Deployment</h1>
+        <p class="subtitle">Choose your deployment method and follow the steps</p>
+        
+        <div class="method-grid">
+            <div class="method-card" onclick="showInstructions('render')">
+                <span class="badge">⭐ Recommended</span>
+                <h2>Render.com</h2>
+                <ul>
+                    <li>100% Free</li>
+                    <li>No credit card</li>
+                    <li>Worldwide access</li>
+                    <li>Auto SSL</li>
+                    <li>5 min setup</li>
+                </ul>
+                <a href="#" class="btn">Deploy Now →</a>
+            </div>
+            
+            <div class="method-card" onclick="showInstructions('railway')">
+                <span class="badge">⚡ Fastest</span>
+                <h2>Railway.app</h2>
+                <ul>
+                    <li>$5 free credit</li>
+                    <li>Auto-detect</li>
+                    <li>No sleep time</li>
+                    <li>3 min setup</li>
+                    <li>Best performance</li>
+                </ul>
+                <a href="#" class="btn">Deploy Now →</a>
+            </div>
+            
+            <div class="method-card" onclick="showInstructions('local')">
+                <span class="badge">🏠 Local</span>
+                <h2>XAMPP (Local)</h2>
+                <ul>
+                    <li>Completely free</li>
+                    <li>LAN access</li>
+                    <li>Full control</li>
+                    <li>10 min setup</li>
+                    <li>No internet needed</li>
+                </ul>
+                <a href="#" class="btn">Setup Now →</a>
+            </div>
+        </div>
+        
+        <!-- Render Instructions -->
+        <div id="render-instructions" class="instructions">
+            <h3>🌐 Deploy to Render.com</h3>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Push to GitHub</strong>
+                <code>cd thyro_sight
+git init
+git add .
+git commit -m "Deploy ThyroSight"
+git remote add origin https://github.com/YOUR_USERNAME/thyrosight.git
+git push -u origin main</code>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Create Render Account</strong>
+                <p>Go to <a href="https://render.com" target="_blank">render.com</a> and sign in with GitHub</p>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Deploy</strong>
+                <ul>
+                    <li>Click "New +" → "Blueprint"</li>
+                    <li>Select your "thyrosight" repository</li>
+                    <li>Click "Apply"</li>
+                    <li>Wait 5 minutes for deployment</li>
+                </ul>
+            </div>
+            
+            <div class="success-box">
+                <strong>✅ Done!</strong> Your app will be live at:<br>
+                <code>https://thyrosight.onrender.com</code>
+            </div>
+            
+            <div class="info-box">
+                <strong>💡 Pro Tip:</strong> Free tier services sleep after 15 minutes of inactivity. First request after sleep takes 30-60 seconds.
+            </div>
+        </div>
+        
+        <!-- Railway Instructions -->
+        <div id="railway-instructions" class="instructions">
+            <h3>⚡ Deploy to Railway.app</h3>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Push to GitHub</strong>
+                <code>cd thyro_sight
+git init
+git add .
+git commit -m "Deploy ThyroSight"
+git remote add origin https://github.com/YOUR_USERNAME/thyrosight.git
+git push -u origin main</code>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Deploy on Railway</strong>
+                <ul>
+                    <li>Go to <a href="https://railway.app" target="_blank">railway.app</a></li>
+                    <li>Sign in with GitHub</li>
+                    <li>Click "New Project" → "Deploy from GitHub"</li>
+                    <li>Select your repository</li>
+                    <li>Railway auto-detects and deploys!</li>
+                </ul>
+            </div>
+            
+            <div class="success-box">
+                <strong>✅ Done!</strong> Your app will be live at:<br>
+                <code>https://thyrosight.up.railway.app</code>
+            </div>
+            
+            <div class="info-box">
+                <strong>💡 Pro Tip:</strong> Railway gives you $5 free credit per month. No sleep time!
+            </div>
+        </div>
+        
+        <!-- Local Instructions -->
+        <div id="local-instructions" class="instructions">
+            <h3>🏠 Deploy Locally with XAMPP</h3>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Install XAMPP</strong>
+                <p>Download from <a href="https://www.apachefriends.org" target="_blank">apachefriends.org</a> and install</p>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Run Setup Script</strong>
+                <p>Double-click <code>setup_local.bat</code> in your project folder</p>
+                <p>This will automatically:</p>
+                <ul>
+                    <li>Copy files to XAMPP</li>
+                    <li>Start Apache and MySQL</li>
+                    <li>Create database</li>
+                    <li>Import schema</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Start ML API</strong>
+                <p>Double-click <code>start_ml_api.bat</code></p>
+            </div>
+            
+            <div class="success-box">
+                <strong>✅ Done!</strong> Access your app at:<br>
+                <code>http://localhost/thyro_sight</code>
+            </div>
+            
+            <div class="info-box">
+                <strong>📱 Access from Phone:</strong><br>
+                1. Find your IP: Open Command Prompt → type <code>ipconfig</code><br>
+                2. On your phone, open: <code>http://YOUR_IP/thyro_sight</code><br>
+                Example: <code>http://192.168.1.100/thyro_sight</code>
+            </div>
+            
+            <div class="warning-box">
+                <strong>⚠️ Note:</strong> Make sure your phone is on the same WiFi network as your computer.
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showInstructions(method) {
+            // Hide all instructions
+            document.querySelectorAll('.instructions').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show selected instructions
+            document.getElementById(method + '-instructions').classList.add('active');
+            
+            // Smooth scroll to instructions
+            setTimeout(() => {
+                document.getElementById(method + '-instructions').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
+    </script>
+</body>
+</html>
