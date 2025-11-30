@@ -1,0 +1,11 @@
+{
+  "name": "thyrosight",
+  "version": "1.0.0",
+  "description": "ThyroSight - Thyroid Health Assessment System",
+  "scripts": {
+    "start": "php -S 0.0.0.0:${PORT:-8080} -t thyro_sight"
+  },
+  "engines": {
+    "node": ">=14.x"
+  }
+}
