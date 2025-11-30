@@ -6,6 +6,7 @@ define('DB_PASS', getenv('DB_PASSWORD') ?: '');
 define('DB_NAME', getenv('DB_NAME') ?: 'thydb');
 define('DB_PORT', getenv('DB_PORT') ?: '3306');
 
+
 // Email configuration
 define('SMTP_HOST', 'smtp.gmail.com');
 define('SMTP_PORT', 587);
