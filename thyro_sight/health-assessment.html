@@ -5842,7 +5842,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const imageData = new FormData();
             imageData.append("image", photoInput.files[0]);
 
-            const cnnResponse = await fetch("http://127.0.0.1:5001/predict_image", {
+            const cnnResponse = await fetch("https://thyrosightmlmodel-production.up.railway.app/predict_image", {
                 method: "POST",
                 body: imageData
             });
@@ -5861,9 +5861,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // 6. Call all Flask models (RF, SVM, GB) with error handling
             //-------------------------------------
             const modelEndpoints = {
-                rf: "http://127.0.0.1:5000/predict",
-                svm: "http://127.0.0.1:5002/predict",
-                gb: "http://127.0.0.1:5003/predict"
+                rf: "https://thyrosightmlmodel-production.up.railway.app/predict",
+                svm: "https://thyrosightmlmodel-production.up.railway.app/predict",
+                gb: "https://thyrosightmlmodel-production.up.railway.app/predict"
             };
 
             // Fetch with individual error handling
