@@ -1,0 +1,43 @@
+{
+    "train_rows": 418,
+    "test_rows": 90,
+    "val_rows": 92,
+    "features": [
+        "Age",
+        "Sex",
+        "Diabetes",
+        "HighBloodPressure",
+        "HighCholesterol",
+        "Anemia",
+        "DepressionAnxiety",
+        "HeartDisease",
+        "AutoimmuneDiseases",
+        "FH_Hypothyroidism",
+        "FH_Hyperthyroidism",
+        "FH_Goiter",
+        "FH_ThyroidCancer",
+        "Sym_Fatigue",
+        "Sym_WeightChange",
+        "Sym_DrySkin",
+        "Sym_HairLoss",
+        "Sym_HeartRate",
+        "Sym_Digestion",
+        "Sym_IrregularPeriods",
+        "Sym_NeckSwelling",
+        "TSH mIU/L",
+        "T3 ng/dL",
+        "T4 (ng/dL)",
+        "FTI",
+        "T4 Uptake"
+    ],
+    "classes": [
+        "Normal",
+        "Hypothyroid",
+        "Hyperthyroid"
+    ],
+    "class_counts": {
+        "Hypothyroid": 204,
+        "Hyperthyroid": 201,
+        "Normal": 195
+    }
+}

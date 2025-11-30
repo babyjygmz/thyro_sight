@@ -1,0 +1,20 @@
+Model Evaluation Results
+=========================
+
+RandomForest+Bagging:
+Accuracy: 1.0
+Precision: 1.0
+Recall: 1.0
+F1 Score: 1.0
+
+SVM:
+Accuracy: 0.833
+Precision: 0.694
+Recall: 0.833
+F1 Score: 0.758
+
+GradientBoost:
+Accuracy: 1.0
+Precision: 1.0
+Recall: 1.0
+F1 Score: 1.0

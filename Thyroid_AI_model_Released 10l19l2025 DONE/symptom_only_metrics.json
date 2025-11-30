@@ -1,0 +1,60 @@
+{
+    "RandomForest_SymptomOnly": {
+        "accuracy": 0.8,
+        "precision": 0.8041847041847041,
+        "recall": 0.8,
+        "f1_score": 0.7977016231918193,
+        "confusion_matrix": [
+            [
+                36,
+                2,
+                2
+            ],
+            [
+                5,
+                28,
+                8
+            ],
+            [
+                4,
+                3,
+                32
+            ]
+        ],
+        "per_class": {
+            "Normal": {
+                "precision": 0.8,
+                "recall": 0.9,
+                "f1-score": 0.8470588235294118,
+                "support": 40.0
+            },
+            "Hypothyroid": {
+                "precision": 0.8484848484848485,
+                "recall": 0.6829268292682927,
+                "f1-score": 0.7567567567567568,
+                "support": 41.0
+            },
+            "Hyperthyroid": {
+                "precision": 0.7619047619047619,
+                "recall": 0.8205128205128205,
+                "f1-score": 0.7901234567901234,
+                "support": 39.0
+            },
+            "accuracy": 0.8,
+            "macro avg": {
+                "precision": 0.8034632034632034,
+                "recall": 0.8011465499270377,
+                "f1-score": 0.7979796790254307,
+                "support": 120.0
+            },
+            "weighted avg": {
+                "precision": 0.8041847041847041,
+                "recall": 0.8,
+                "f1-score": 0.7977016231918193,
+                "support": 120.0
+            }
+        },
+        "cv_mean": 0.88125,
+        "cv_std": 0.040397332145136085
+    }
+}

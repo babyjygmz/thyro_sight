@@ -1,0 +1,229 @@
+{
+    "TRAIN": {
+        "RandomForest": {
+            "accuracy": 0.9833,
+            "precision": 0.9834,
+            "recall": 0.9833,
+            "f1_score": 0.9833,
+            "confusion_matrix": [
+                [
+                    138,
+                    0,
+                    2
+                ],
+                [
+                    2,
+                    138,
+                    2
+                ],
+                [
+                    0,
+                    1,
+                    136
+                ]
+            ]
+        },
+        "SVM": {
+            "accuracy": 0.9857,
+            "precision": 0.9857,
+            "recall": 0.9857,
+            "f1_score": 0.9857,
+            "confusion_matrix": [
+                [
+                    139,
+                    0,
+                    1
+                ],
+                [
+                    1,
+                    139,
+                    2
+                ],
+                [
+                    1,
+                    1,
+                    135
+                ]
+            ]
+        },
+        "GradientBoosting": {
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0,
+            "confusion_matrix": [
+                [
+                    140,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    142,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    137
+                ]
+            ]
+        }
+    },
+    "TEST": {
+        "RandomForest": {
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0,
+            "confusion_matrix": [
+                [
+                    30,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    30,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    29
+                ]
+            ]
+        },
+        "SVM": {
+            "accuracy": 0.9775,
+            "precision": 0.9775,
+            "recall": 0.9775,
+            "f1_score": 0.9775,
+            "confusion_matrix": [
+                [
+                    29,
+                    1,
+                    0
+                ],
+                [
+                    1,
+                    29,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    29
+                ]
+            ]
+        },
+        "GradientBoosting": {
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0,
+            "confusion_matrix": [
+                [
+                    30,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    30,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    29
+                ]
+            ]
+        }
+    },
+    "VAL": {
+        "RandomForest": {
+            "accuracy": 0.9891,
+            "precision": 0.9895,
+            "recall": 0.9891,
+            "f1_score": 0.9891,
+            "confusion_matrix": [
+                [
+                    31,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    30,
+                    1
+                ],
+                [
+                    0,
+                    0,
+                    30
+                ]
+            ]
+        },
+        "SVM": {
+            "accuracy": 0.9891,
+            "precision": 0.9895,
+            "recall": 0.9891,
+            "f1_score": 0.9891,
+            "confusion_matrix": [
+                [
+                    31,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    30,
+                    1
+                ],
+                [
+                    0,
+                    0,
+                    30
+                ]
+            ]
+        },
+        "GradientBoosting": {
+            "accuracy": 0.9891,
+            "precision": 0.9895,
+            "recall": 0.9891,
+            "f1_score": 0.9891,
+            "confusion_matrix": [
+                [
+                    31,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    30,
+                    1
+                ],
+                [
+                    0,
+                    0,
+                    30
+                ]
+            ]
+        }
+    },
+    "CV": {
+        "RandomForest": {
+            "mean_accuracy": 0.9809,
+            "std_dev": 0.0123
+        },
+        "SVM": {
+            "mean_accuracy": 0.9737,
+            "std_dev": 0.0117
+        },
+        "GradientBoosting": {
+            "mean_accuracy": 0.9761,
+            "std_dev": 0.0131
+        }
+    }
+}
